@@ -1,0 +1,7 @@
+<svg width="220" height="40" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="8" fill="#3B82F6" />
+  <path d="M12 28L20 12L28 28H12Z" fill="white" />
+  <path d="M20 12L28 28H20V12Z" fill="#93C5FD" />
+  <text x="50" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#F9FAFB">Palata</text>
+  <text x="108" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="400" fill="#9CA3AF">Municipality</text>
+</svg>
