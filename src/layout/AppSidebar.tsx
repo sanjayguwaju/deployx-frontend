@@ -144,7 +144,11 @@ const navItems: NavItem[] = [
     icon: <GridIcon />,
     name: "Branding",
     path: "/settings/branding",
-    // No specific subject needed if we just check for municipality_admin in UI
+  },
+  {
+    icon: <GridIcon />,
+    name: "WhatsApp",
+    path: "/settings/whatsapp",
   },
   {
     icon: <PieChartIcon />,

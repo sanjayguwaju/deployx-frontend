@@ -62,6 +62,7 @@ import Billing from "./pages/System/Billing";
 import BillingVerify from "./pages/System/BillingVerify";
 import PlatformBilling from "./pages/System/PlatformBilling";
 import WardsAdmin from "./pages/System/WardsAdmin";
+import WhatsAppIntegration from "./pages/System/WhatsAppIntegration";
 
 import GhatanaDarta from "./pages/GhatanaDarta/GhatanaDarta";
 import TaxEngine from "./pages/Tax/TaxEngine";
@@ -137,6 +138,7 @@ export default function App() {
                   <Route path="/system/billing-admin" element={<ProtectedRoute action="manage" subject="all"><PlatformBilling /></ProtectedRoute>} />
                   <Route path="/system/wards" element={<ProtectedRoute action="manage" subject="system"><WardsAdmin /></ProtectedRoute>} />
                   <Route path="/settings/branding" element={<ProtectedRoute><BrandingSettings /></ProtectedRoute>} />
+                  <Route path="/settings/whatsapp" element={<ProtectedRoute><WhatsAppIntegration /></ProtectedRoute>} />
 
                   {/* Billing Routes */}
                   <Route path="/billing" element={<Billing />} />
