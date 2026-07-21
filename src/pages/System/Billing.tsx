@@ -58,7 +58,7 @@ export default function Billing() {
   return (
     <>
       <PageMeta
-        title="Billing & Subscription | PalikaOS"
+        title="Billing & Subscription | DeployX"
         description="Manage your SaaS subscription and billing"
       />
       <PageBreadcrumb pageTitle="Billing & Subscription" />

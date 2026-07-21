@@ -30,10 +30,10 @@ export default function AuthLayout({
                 {branding?.logoUrl ? (
                   <img src={branding.logoUrl} alt="Logo" className="w-24 h-24 mx-auto object-contain mb-4" />
                 ) : null}
-                <h2 className="text-3xl font-bold text-white sm:text-4xl">{branding?.name || "PalikaOS"}</h2>
+                <h2 className="text-3xl font-bold text-white sm:text-4xl">{branding?.name || "DeployX"}</h2>
               </Link>
               <p className="text-center text-gray-400 dark:text-white/60">
-                Welcome to the official Municipality Management System of {branding?.name || "PalikaOS"}.
+                Welcome to the official Recruitment CRM of {branding?.name || "DeployX"}.
               </p>
             </div>
           </div>

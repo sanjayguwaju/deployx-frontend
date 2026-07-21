@@ -64,7 +64,7 @@ export default function VerifyDocument() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8 dark:bg-gray-900">
-      <PageMeta title="Verify Document | PalikaOS" description="Verify official government documents." />
+      <PageMeta title="Verify Document | DeployX" description="Verify official government documents." />
       <div className="w-full max-w-md space-y-8 rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800">
         <div className="text-center">
           {error ? (

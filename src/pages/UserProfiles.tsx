@@ -9,7 +9,7 @@ export default function UserProfiles() {
   return (
     <>
       <PageMeta
-        title="Profile | PalikaOS"
+        title="Profile | DeployX"
         description="User profile management"
       />
       <PageBreadcrumb pageTitle="Profile" />

@@ -6,7 +6,7 @@ export default function Complaints() {
   return (
     <>
       <PageMeta
-        title="Complaints | PalikaOS"
+        title="Complaints | DeployX"
         description="Manage and track citizen complaints"
       />
       <PageBreadcrumb pageTitle="Complaints" />

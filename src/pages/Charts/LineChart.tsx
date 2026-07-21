@@ -7,8 +7,8 @@ export default function LineChart() {
   return (
     <div>
       <PageMeta
-        title="Line Chart | PalikaOS"
-        description="Line Chart preview page for PalikaOS"
+        title="Line Chart | DeployX"
+        description="Line Chart preview page for DeployX"
       />
       <PageBreadcrumb pageTitle="Line Chart" />
       <div className="space-y-6">

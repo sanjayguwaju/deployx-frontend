@@ -6,8 +6,8 @@ export default function ForgotPassword() {
   return (
     <>
       <PageMeta
-        title="Forgot Password | PalikaOS"
-        description="Reset your password for PalikaOS"
+        title="Forgot Password | DeployX"
+        description="Reset your password for DeployX"
       />
       <AuthLayout>
         <ForgotPasswordForm />

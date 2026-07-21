@@ -6,8 +6,8 @@ export default function AuditLogs() {
   return (
     <>
       <PageMeta
-        title="Audit Logs | PalikaOS"
-        description="System-wide activity trail for PalikaOS"
+        title="Audit Logs | DeployX"
+        description="System-wide activity trail for DeployX"
       />
       <PageBreadcrumb pageTitle="Audit Logs" />
       <div className="space-y-6">

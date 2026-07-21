@@ -4,7 +4,7 @@ import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 export default function TaxEngine() {
   return (
     <>
-      <PageMeta title="Tax Engine | PalikaOS" description="Tax rules evaluation system" />
+      <PageMeta title="Tax Engine | DeployX" description="Tax rules evaluation system" />
       <PageBreadcrumb pageTitle="Tax Rules Engine" />
       
       <div className="p-6 bg-white border border-gray-200 rounded-2xl dark:bg-gray-800 dark:border-gray-700">

@@ -6,7 +6,7 @@ export default function Correspondence() {
   return (
     <>
       <PageMeta
-        title="Correspondence | PalikaOS"
+        title="Correspondence | DeployX"
         description="Manage incoming and outgoing official correspondence (Darta/Chalani)"
       />
       <PageBreadcrumb pageTitle="Correspondence" />

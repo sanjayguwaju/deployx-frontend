@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const categories = [
   {
     title: "Getting Started",
-    description: "Learn the basics of PalikaOS and set up your municipality profile.",
+    description: "Learn the basics of DeployX and set up your municipality profile.",
     icon: BookOpen,
     color: "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
   },
@@ -34,7 +34,7 @@ const categories = [
   },
   {
     title: "Developer API",
-    description: "Integrate PalikaOS with third-party tools using our REST API.",
+    description: "Integrate DeployX with third-party tools using our REST API.",
     icon: Code,
     color: "bg-slate-50 text-slate-600 dark:bg-slate-900/20 dark:text-slate-400",
   },
@@ -58,7 +58,7 @@ export default function DocumentationPage() {
             How can we help you?
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
-            Search our knowledge base or browse categories to learn how to configure and use PalikaOS effectively.
+            Search our knowledge base or browse categories to learn how to configure and use DeployX effectively.
           </p>
           
           {/* Search Bar */}

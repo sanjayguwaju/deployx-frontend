@@ -7,8 +7,8 @@ export default function PieChart() {
   return (
     <div>
       <PageMeta
-        title="Pie Chart | PalikaOS"
-        description="Pie Chart preview page for PalikaOS"
+        title="Pie Chart | DeployX"
+        description="Pie Chart preview page for DeployX"
       />
       <PageBreadcrumb pageTitle="Pie Chart" />
       <div className="space-y-6">

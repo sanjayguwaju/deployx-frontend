@@ -8,8 +8,8 @@ export default function Users() {
   return (
     <>
       <PageMeta
-        title={`${t("users.page_title")} | PalikaOS`}
-        description="Manage system users for PalikaOS"
+        title={`${t("users.page_title")} | DeployX`}
+        description="Manage system users for DeployX"
       />
       <PageBreadcrumb pageTitle={t("users.page_title")} />
       <div className="space-y-6">

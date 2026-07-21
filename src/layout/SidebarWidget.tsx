@@ -8,7 +8,7 @@ export default function SidebarWidget() {
         Need Assistance?
       </h3>
       <p className="mb-4 text-gray-500 text-theme-sm dark:text-gray-400">
-        Contact PalikaOS IT Support for any technical issues.
+        Contact DeployX IT Support for any technical issues.
       </p>
       <a
         href="mailto:support@demo.gov.np"

@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 prose prose-lg dark:prose-invert prose-brand">
         <p>
-          At PalikaOS, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our municipality management platform. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
+          At DeployX, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our manpower recruitment platform. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
         </p>
 
         <h2>1. Information We Collect</h2>
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
         <ul>
           <li>Create and manage your account.</li>
           <li>Process your transactions and send you related information, including purchase confirmations and invoices.</li>
-          <li>Manage citizen data securely under the jurisdiction of the registered municipality.</li>
+          <li>Manage candidate and employer data securely under the jurisdiction of your registered recruitment agency.</li>
           <li>Respond to customer service requests and provide support.</li>
           <li>Send you technical notices, updates, security alerts, and support and administrative messages.</li>
         </ul>
@@ -69,8 +69,8 @@ export default function PrivacyPolicyPage() {
           If you have questions or comments about this Privacy Policy, please contact us at:
         </p>
         <p>
-          <strong>PalikaOS Technologies</strong><br />
-          Email: privacy@palikaos.com<br />
+          <strong>DeployX Technologies</strong><br />
+          Email: privacy@deployx.io<br />
           Phone: +977-1-4123456
         </p>
       </div>

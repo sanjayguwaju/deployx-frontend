@@ -3,7 +3,7 @@ import { MessageSquare, Users, BookOpen, HeartHandshake, ChevronRight, MessageCi
 const communityLinks = [
   {
     title: "Community Forums",
-    description: "Ask questions, share solutions, and discuss best practices with other PalikaOS administrators.",
+    description: "Ask questions, share solutions, and discuss best practices with other DeployX administrators.",
     icon: MessageSquare,
     action: "Visit Forums",
     color: "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
@@ -17,7 +17,7 @@ const communityLinks = [
   },
   {
     title: "GitHub Discussions",
-    description: "Contribute to PalikaOS, suggest features, and track the development roadmap.",
+    description: "Contribute to DeployX, suggest features, and track the development roadmap.",
     icon: Code,
     action: "View GitHub",
     color: "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300",
@@ -41,7 +41,7 @@ export default function CommunityPage() {
             <HeartHandshake className="h-8 w-8" />
           </div>
           <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl mb-6">
-            Join the PalikaOS Community
+            Join the DeployX Community
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Connect with other municipalities, share best practices, and help shape the future of local government technology in Nepal.

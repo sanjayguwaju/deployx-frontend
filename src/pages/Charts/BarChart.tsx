@@ -7,8 +7,8 @@ export default function BarChart() {
   return (
     <div>
       <PageMeta
-        title="Bar Chart | PalikaOS"
-        description="Bar Chart preview page for PalikaOS"
+        title="Bar Chart | DeployX"
+        description="Bar Chart preview page for DeployX"
       />
       <PageBreadcrumb pageTitle="Bar Chart" />
       <div className="space-y-6">

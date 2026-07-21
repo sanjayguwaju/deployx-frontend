@@ -472,7 +472,7 @@ const AppSidebar: React.FC = () => {
                 />
               )}
               <h1 className="text-lg font-bold text-gray-900 dark:text-white truncate">
-                {branding?.name || "PalikaOS"}
+                {branding?.name || "DeployX"}
               </h1>
             </>
           ) : (

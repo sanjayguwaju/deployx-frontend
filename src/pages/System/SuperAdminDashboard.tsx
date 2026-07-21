@@ -4,7 +4,7 @@ import TenantsAdmin from "./TenantsAdmin";
 export default function SuperAdminDashboard() {
   return (
     <>
-      <PageMeta title="Super Admin Dashboard | PalikaOS" description="Global platform administration dashboard" />
+      <PageMeta title="Super Admin Dashboard | DeployX" description="Global platform administration dashboard" />
       
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-title-md2 font-semibold text-gray-800 dark:text-white/90">

@@ -18,7 +18,7 @@ export default function MarketingLayout() {
                 <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center">
                   <Server className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">Palika<span className="text-brand-500">OS</span></span>
+                <span className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">Deploy<span className="text-brand-500">X</span></span>
               </Link>
             </div>
             {/* Desktop Navigation */}
@@ -50,8 +50,8 @@ export default function MarketingLayout() {
               <Link to="/contact" className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors">
                 Contact
               </Link>
-              <Link to="/citizen/track" className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors">
-                Citizen Portal
+              <Link to="/candidate/track" className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors">
+                Candidate Portal
               </Link>
             </div>
 
@@ -61,7 +61,7 @@ export default function MarketingLayout() {
                 Sign In
               </Link>
               <Link to="/register" className="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors shadow-sm shadow-brand-500/20">
-                Register Municipality
+                Register Agency
               </Link>
             </div>
 
@@ -89,7 +89,7 @@ export default function MarketingLayout() {
       {/* Mobile Drawer */}
       <div className={`fixed inset-y-0 right-0 z-70 w-72 bg-white dark:bg-gray-900 shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden flex flex-col ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
         <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center">
-          <span className="text-xl font-bold text-gray-900 dark:text-white">Palika<span className="text-brand-500">OS</span></span>
+          <span className="text-xl font-bold text-gray-900 dark:text-white">Deploy<span className="text-brand-500">X</span></span>
           <button 
             onClick={() => setIsMobileMenuOpen(false)}
             className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -137,8 +137,8 @@ export default function MarketingLayout() {
             Contact
           </Link>
 
-          <Link to="/citizen/track" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
-            Citizen Portal
+          <Link to="/candidate/track" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+            Candidate Portal
           </Link>
         </div>
 
@@ -147,7 +147,7 @@ export default function MarketingLayout() {
             Sign In
           </Link>
           <Link to="/register" className="w-full flex justify-center items-center bg-brand-500 hover:bg-brand-600 text-white px-5 py-3 rounded-xl text-base font-medium transition-colors shadow-sm shadow-brand-500/20">
-            Register Municipality
+            Register Agency
           </Link>
         </div>
       </div>
@@ -165,13 +165,13 @@ export default function MarketingLayout() {
               <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center">
                 <Server className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">Palika<span className="text-brand-500">OS</span></span>
+              <span className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">Deploy<span className="text-brand-500">X</span></span>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm mb-6 leading-relaxed">
-              The leading Multi-Tenant SaaS Operating System for Local Governments in Nepal. Empowering municipalities with digital tools.
+              The leading Multi-Tenant SaaS Operating System for Overseas Recruitment Agencies. Empowering manpower companies with digital tools.
             </p>
             <p className="text-sm text-gray-400 dark:text-gray-500">
-              &copy; {new Date().getFullYear()} PalikaOS Technologies. All rights reserved.
+              &copy; {new Date().getFullYear()} DeployX Technologies. All rights reserved.
             </p>
           </div>
           <div>
@@ -180,7 +180,7 @@ export default function MarketingLayout() {
               <li><Link to="/features" className="hover:text-brand-500 transition-colors">Features</Link></li>
               <li><Link to="/how-it-works" className="hover:text-brand-500 transition-colors">How it Works</Link></li>
               <li><Link to="/pricing" className="hover:text-brand-500 transition-colors">Pricing</Link></li>
-              <li><Link to="/citizen/track" className="hover:text-brand-500 transition-colors">Citizen Portal</Link></li>
+              <li><Link to="/candidate/track" className="hover:text-brand-500 transition-colors">Candidate Portal</Link></li>
             </ul>
           </div>
           <div>

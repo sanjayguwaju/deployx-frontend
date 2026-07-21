@@ -29,7 +29,7 @@ export default function Registrations() {
   return (
     <>
       <PageMeta
-        title="Vital Event Registrations | PalikaOS"
+        title="Vital Event Registrations | DeployX"
         description="Manage vital event registrations (Birth, Death, Marriage, Migration)"
       />
       <PageBreadcrumb pageTitle="Vital Event Registrations" />

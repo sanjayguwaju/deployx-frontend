@@ -10,17 +10,17 @@ export default function TermsOfServicePage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 prose prose-lg dark:prose-invert prose-brand">
         <p>
-          These Terms of Service ("Terms") govern your access to and use of the PalikaOS website, services, and software platform (collectively, the "Services"). By accessing or using the Services, you agree to be bound by these Terms and our Privacy Policy.
+          These Terms of Service ("Terms") govern your access to and use of the DeployX website, services, and software platform (collectively, the "Services"). By accessing or using the Services, you agree to be bound by these Terms and our Privacy Policy.
         </p>
 
         <h2>1. Acceptance of Terms</h2>
         <p>
-          By using our Services, you agree to these Terms. If you don't agree to these Terms, do not use the Services. If you are using the Services on behalf of a municipality, organization, or other legal entity, you represent and warrant that you have the authority to bind that entity to these Terms.
+          By using our Services, you agree to these Terms. If you don't agree to these Terms, do not use the Services. If you are using the Services on behalf of a recruitment agency, organization, or other legal entity, you represent and warrant that you have the authority to bind that entity to these Terms.
         </p>
 
         <h2>2. Description of Services</h2>
         <p>
-          PalikaOS provides a multi-tenant SaaS operating system designed for local governments and municipalities in Nepal. This includes modules for taxation, vital events registration (Ghatana Darta), citizen portals, and document approvals. We reserve the right to modify, suspend, or discontinue the Services at any time, with or without notice.
+          DeployX provides a multi-tenant SaaS operating system designed for overseas manpower recruitment agencies. This includes modules for candidate management, job demand pipelines, visa processing, document compliance, and agent portals. We reserve the right to modify, suspend, or discontinue the Services at any time, with or without notice.
         </p>
 
         <h2>3. Account Registration</h2>
@@ -41,12 +41,12 @@ export default function TermsOfServicePage() {
 
         <h2>5. Intellectual Property</h2>
         <p>
-          The Services and their original content, features, and functionality are and will remain the exclusive property of PalikaOS Technologies and its licensors. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of PalikaOS.
+          The Services and their original content, features, and functionality are and will remain the exclusive property of DeployX Technologies and its licensors. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of DeployX.
         </p>
 
         <h2>6. Limitation of Liability</h2>
         <p>
-          In no event shall PalikaOS, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Services.
+          In no event shall DeployX, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Services.
         </p>
 
         <h2>7. Termination</h2>
@@ -59,8 +59,8 @@ export default function TermsOfServicePage() {
           If you have any questions about these Terms, please contact us at:
         </p>
         <p>
-          <strong>PalikaOS Technologies</strong><br />
-          Email: legal@palikaos.com<br />
+          <strong>DeployX Technologies</strong><br />
+          Email: legal@deployx.io<br />
           Phone: +977-1-4123456
         </p>
       </div>

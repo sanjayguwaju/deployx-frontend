@@ -5,7 +5,7 @@ import { GroupIcon, BoxCubeIcon } from "../../icons";
 export default function TenantAdminDashboard() {
   return (
     <>
-      <PageMeta title="Administrator Dashboard | PalikaOS" description="Tenant Administrator Dashboard" />
+      <PageMeta title="Administrator Dashboard | DeployX" description="Tenant Administrator Dashboard" />
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-title-md2 font-semibold text-gray-800 dark:text-white/90">
           Administrator Dashboard

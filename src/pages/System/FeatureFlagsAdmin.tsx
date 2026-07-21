@@ -199,7 +199,7 @@ const FeatureFlagsAdmin = () => {
 
   return (
     <>
-      <PageMeta title="Feature Flags Matrix | PalikaOS" description="Manage feature flags per tenant" />
+      <PageMeta title="Feature Flags Matrix | DeployX" description="Manage feature flags per tenant" />
       <PageBreadcrumb pageTitle="Feature Flags" />
 
       <div className="w-full min-w-0 overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/5 dark:bg-white/3">

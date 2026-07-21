@@ -4,7 +4,7 @@ import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 export default function GhatanaDarta() {
   return (
     <>
-      <PageMeta title="Ghatana Darta | PalikaOS" description="Vital events registration system" />
+      <PageMeta title="Ghatana Darta | DeployX" description="Vital events registration system" />
       <PageBreadcrumb pageTitle="Vital Events (Ghatana Darta)" />
       
       <div className="p-6 bg-white border border-gray-200 rounded-2xl dark:bg-gray-800 dark:border-gray-700">

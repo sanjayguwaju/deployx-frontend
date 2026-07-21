@@ -35,7 +35,7 @@ import CommunityPage from "./pages/Marketing/CommunityPage";
 import ContactPage from "./pages/Marketing/ContactPage";
 import PrivacyPolicyPage from "./pages/Marketing/PrivacyPolicyPage";
 import TermsOfServicePage from "./pages/Marketing/TermsOfServicePage";
-import RegisterMunicipality from "./pages/Onboarding/RegisterMunicipality";
+import RegisterAgency from "./pages/Onboarding/RegisterAgency";
 import Users from "./pages/Users/Users";
 import Roles from "./pages/Users/Roles";
 import Citizens from "./pages/Citizens/Citizens";
@@ -79,7 +79,7 @@ export default function App() {
   } else if (parts.length > 2) {
     subdomain = parts[0];
   }
-  const isNakedDomain = !subdomain || subdomain === "www" || subdomain === "app" || subdomain === "palikaos";
+  const isNakedDomain = !subdomain || subdomain === "www" || subdomain === "app" || subdomain === "deployx";
 
   return (
     <>
@@ -109,7 +109,7 @@ export default function App() {
                 ) : (
                   <Route path="/" element={<Navigate to="/signin" replace />} />
                 )}
-                <Route path="/register" element={<RegisterMunicipality />} />
+                <Route path="/register" element={<RegisterAgency />} />
 
                 {/* Dashboard Layout */}
                 <Route element={<AppLayout />}>

@@ -48,7 +48,7 @@ export default function CitizenTrack() {
                 </div>
               )}
               <span className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
-                {branding?.name || "PalikaOS"}
+                {branding?.name || "DeployX"}
               </span>
             </div>
             <div className="flex items-center space-x-4">
@@ -62,7 +62,7 @@ export default function CitizenTrack() {
       <div className="flex-1 max-w-4xl w-full px-4 py-12 mx-auto sm:px-6 lg:px-8">
         <div className="text-center">
           <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
-            {branding?.name || "PalikaOS"} Citizen Portal
+            {branding?.name || "DeployX"} Citizen Portal
           </h1>
           <p className="max-w-2xl mx-auto mt-3 text-xl text-gray-500 dark:text-gray-400 sm:mt-4">
             Track your complaints, service requests, and vital events.

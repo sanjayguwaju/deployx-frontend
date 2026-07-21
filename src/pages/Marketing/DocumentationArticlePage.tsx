@@ -32,12 +32,12 @@ export default function DocumentationArticlePage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         <article className="prose prose-lg dark:prose-invert prose-brand max-w-none">
           <p className="lead">
-            Role-Based Access Control (RBAC) is a method of restricting network access based on the roles of individual users within an enterprise. In PalikaOS, RBAC ensures that municipal staff only have access to the information and actions necessary for their specific jobs.
+            Role-Based Access Control (RBAC) is a method of restricting network access based on the roles of individual users within an enterprise. In DeployX, RBAC ensures that municipal staff only have access to the information and actions necessary for their specific jobs.
           </p>
 
           <h2>Core Concepts</h2>
           <p>
-            PalikaOS utilizes three main components for its permission system:
+            DeployX utilizes three main components for its permission system:
           </p>
           <ul>
             <li><strong>Users:</strong> The actual individuals logging into the system.</li>
@@ -47,7 +47,7 @@ export default function DocumentationArticlePage() {
 
           <h2>Default Roles</h2>
           <p>
-            When you register your municipality on PalikaOS, several default roles are automatically provisioned:
+            When you register your municipality on DeployX, several default roles are automatically provisioned:
           </p>
           
           <div className="overflow-x-auto my-8">

@@ -10,7 +10,7 @@ export default function Notifications() {
   return (
     <>
       <PageMeta
-        title="Notifications Log | PalikaOS"
+        title="Notifications Log | DeployX"
         description="View SMS, Email, and Push notifications sent to citizens"
       />
       <div className="flex items-center justify-between">

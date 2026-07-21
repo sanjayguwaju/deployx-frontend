@@ -258,7 +258,7 @@ export default function DisasterManagement() {
             Incident Map
           </h3>
           <div className="flex-1 min-h-[350px] w-full bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden z-0">
-            {/* PalikaOS Approx Center [Lat, Lng] */}
+            {/* DeployX Approx Center [Lat, Lng] */}
             <MapContainer center={[29.2312, 81.7225]} zoom={11} className="h-full w-full">
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'

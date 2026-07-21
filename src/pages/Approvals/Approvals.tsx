@@ -106,7 +106,7 @@ export default function Approvals() {
 
   return (
     <div>
-      <PageMeta title="Approvals | PalikaOS" description="Pending approvals" />
+      <PageMeta title="Approvals | DeployX" description="Pending approvals" />
       <PageBreadcrumb pageTitle="Approvals" />
 
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">

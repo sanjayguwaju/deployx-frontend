@@ -134,7 +134,7 @@ export const CommandPalette: React.FC = () => {
             </span>
           </div>
           <div className="flex items-center gap-1.5 font-medium text-gray-400">
-            PalikaOS Command Palette
+            DeployX Command Palette
           </div>
         </div>
       </Command>

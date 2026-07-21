@@ -20,7 +20,7 @@ export default function ApiReferencePage() {
               API Reference
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-              Integrate your external systems with PalikaOS using our secure REST API. Build custom workflows, sync data, and automate municipal operations.
+              Integrate your external systems with DeployX using our secure REST API. Build custom workflows, sync data, and automate municipal operations.
             </p>
           </div>
         </div>
@@ -45,10 +45,10 @@ export default function ApiReferencePage() {
               </p>
               <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-4 sm:p-5 border border-gray-200 dark:border-gray-700 flex items-center justify-between group">
                 <code className="text-brand-600 dark:text-brand-400 font-mono text-sm sm:text-base font-semibold">
-                  https://api.palikaos.com/v1
+                  https://api.deployx.io/v1
                 </code>
                 <button 
-                  onClick={() => handleCopy("https://api.palikaos.com/v1")}
+                  onClick={() => handleCopy("https://api.deployx.io/v1")}
                   className="p-2.5 text-gray-400 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-300 transition-all active:scale-95"
                   title="Copy to clipboard"
                 >
@@ -124,7 +124,7 @@ export default function ApiReferencePage() {
                 </div>
                 <div className="p-5 overflow-x-auto custom-scrollbar">
                   <pre className="text-[13px] font-mono leading-loose text-gray-300">
-<span className="text-pink-400 font-semibold">curl</span> https://api.palikaos.com/v1/users \
+<span className="text-pink-400 font-semibold">curl</span> https://api.deployx.io/v1/users \
   <span className="text-blue-400">-H</span> <span className="text-green-300">"Authorization: Bearer YOUR_API_KEY"</span> \
   <span className="text-blue-400">-H</span> <span className="text-green-300">"Content-Type: application/json"</span>
                   </pre>
@@ -148,7 +148,7 @@ export default function ApiReferencePage() {
     &#123;
       <span className="text-blue-300">"id"</span>: <span className="text-green-300">"usr_1a2b3c"</span>,
       <span className="text-blue-300">"name"</span>: <span className="text-green-300">"Musharof Chowdhury"</span>,
-      <span className="text-blue-300">"email"</span>: <span className="text-green-300">"admin@palikaos.com"</span>,
+      <span className="text-blue-300">"email"</span>: <span className="text-green-300">"admin@deployx.io"</span>,
       <span className="text-blue-300">"roles"</span>: [<span className="text-green-300">"SUPER_ADMIN"</span>]
     &#125;,
     <span className="text-gray-500 italic">...</span>

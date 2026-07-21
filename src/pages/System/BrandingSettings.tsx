@@ -111,7 +111,7 @@ export default function BrandingSettings() {
   return (
     <>
       <PageMeta
-        title="Branding Settings | PalikaOS"
+        title="Branding Settings | DeployX"
         description="Update your municipality branding"
       />
       <PageBreadcrumb pageTitle="Branding Settings" />
@@ -145,7 +145,7 @@ export default function BrandingSettings() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. PalikaOS Rural Municipality"
+                placeholder="e.g. DeployX Rural Municipality"
                 className="w-full rounded-xl border border-gray-200 bg-transparent px-4 py-3 text-sm text-gray-800 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 dark:border-gray-800 dark:text-white/90 dark:focus:border-brand-400"
               />
             </div>

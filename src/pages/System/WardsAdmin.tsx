@@ -5,7 +5,7 @@ export default function WardsAdmin() {
   return (
     <div className="space-y-6">
       <Helmet>
-        <title>Ward Management | PalikaOS</title>
+        <title>Ward Management | DeployX</title>
       </Helmet>
 
       <div>
