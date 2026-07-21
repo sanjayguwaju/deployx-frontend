@@ -68,6 +68,7 @@ import GhatanaDarta from "./pages/GhatanaDarta/GhatanaDarta";
 import TaxEngine from "./pages/Tax/TaxEngine";
 import CitizenTrack from "./pages/Citizen/CitizenTrack";
 import VerifyDocument from "./pages/Public/VerifyDocument";
+import SignContract from "./pages/Public/SignContract";
 import { SocketProvider } from "./context/SocketContext";
 import { TooltipProvider } from "./components/ui/tooltip/Tooltip";
 
@@ -181,6 +182,7 @@ export default function App() {
                 {/* Public Citizen Portal */}
                 <Route path="/citizen/track" element={<CitizenTrack />} />
                 <Route path="/verify/:hash" element={<VerifyDocument />} />
+                <Route path="/sign/:id" element={<SignContract />} />
 
                 {/* Auth Layout */}
                 <Route path="/signin" element={<SignIn />} />
