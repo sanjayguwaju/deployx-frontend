@@ -46,6 +46,7 @@ import Correspondence from "./pages/Correspondence/Correspondence";
 import Notifications from "./pages/Notifications/Notifications";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import AuditLogs from "./pages/AuditLogs/AuditLogs";
+import PipelineBoard from "./pages/Pipeline/PipelineBoard";
 import Health from "./pages/Departments/Health";
 import Education from "./pages/Departments/Education";
 import Infrastructure from "./pages/Departments/Infrastructure";
@@ -131,6 +132,7 @@ export default function App() {
                   <Route path="/correspondence" element={<ProtectedRoute action="read" subject="correspondence"><Correspondence /></ProtectedRoute>} />
                   <Route path="/notifications" element={<ProtectedRoute action="read" subject="notifications"><Notifications /></ProtectedRoute>} />
                   <Route path="/audit-logs" element={<ProtectedRoute action="read" subject="audit_logs"><AuditLogs /></ProtectedRoute>} />
+                  <Route path="/demands/:id/pipeline" element={<ProtectedRoute action="read" subject="dashboard"><PipelineBoard /></ProtectedRoute>} />
                   <Route path="/approvals" element={<ProtectedRoute action="read" subject="ApprovableDocument"><Approvals /></ProtectedRoute>} />
                   <Route path="/feature-flags" element={<ProtectedRoute action="manage" subject="FeatureFlag"><FeatureFlagsAdmin /></ProtectedRoute>} />
                   <Route path="/administrator" element={<ProtectedRoute><TenantAdminDashboard /></ProtectedRoute>} />
