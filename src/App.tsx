@@ -47,6 +47,9 @@ import Notifications from "./pages/Notifications/Notifications";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import AuditLogs from "./pages/AuditLogs/AuditLogs";
 import PipelineBoard from "./pages/Pipeline/PipelineBoard";
+import AgentDashboard from "./pages/AgentPortal/AgentDashboard";
+import AgentCandidates from "./pages/AgentPortal/AgentCandidates";
+import AgentCommissions from "./pages/AgentPortal/AgentCommissions";
 import Health from "./pages/Departments/Health";
 import Education from "./pages/Departments/Education";
 import Infrastructure from "./pages/Departments/Infrastructure";
@@ -142,6 +145,11 @@ export default function App() {
                   <Route path="/system/wards" element={<ProtectedRoute action="manage" subject="system"><WardsAdmin /></ProtectedRoute>} />
                   <Route path="/settings/branding" element={<ProtectedRoute><BrandingSettings /></ProtectedRoute>} />
                   <Route path="/settings/whatsapp" element={<ProtectedRoute><WhatsAppIntegration /></ProtectedRoute>} />
+
+                  {/* Agent Portal */}
+                  <Route path="/agent/dashboard" element={<ProtectedRoute><AgentDashboard /></ProtectedRoute>} />
+                  <Route path="/agent/candidates" element={<ProtectedRoute><AgentCandidates /></ProtectedRoute>} />
+                  <Route path="/agent/commissions" element={<ProtectedRoute><AgentCommissions /></ProtectedRoute>} />
 
                   {/* Billing Routes */}
                   <Route path="/billing" element={<Billing />} />
