@@ -29,7 +29,7 @@ export const TenantProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         subdomain = parts[0];
       }
 
-      if (subdomain === "app" || subdomain === "www") {
+      if (["app", "www", "deployx", "deployxos"].includes(subdomain)) {
         subdomain = "demo";
       }
 
