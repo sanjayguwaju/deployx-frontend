@@ -4,20 +4,15 @@ import { useTranslation } from "react-i18next";
 
 // Assume these icons are imported from an icon library
 import {
-  BoxCubeIcon,
-  CalenderIcon,
   ChevronDownIcon,
   GridIcon,
   HorizontaLDots,
   ListIcon,
   PageIcon,
-  PieChartIcon,
   GroupIcon,
   CheckCircleIcon,
   UserIcon,
   FileIcon,
-  InfoIcon,
-  AlertIcon,
   FolderIcon,
   EnvelopeIcon,
 } from "../icons";
@@ -39,72 +34,67 @@ type NavItem = {
 const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
-    name: "sidebar.dashboard",
+    name: "Dashboard",
     path: "/dashboard",
     subject: "dashboard",
   },
   {
-    icon: <CheckCircleIcon />,
-    name: "sidebar.approvals",
-    path: "/approvals",
-    subject: "ApprovableDocument",
-  },
-  {
-    icon: <CalenderIcon />,
-    name: "sidebar.calendar",
-    path: "/calendar",
-  },
-  {
     icon: <UserIcon />,
-    name: "sidebar.citizens",
-    path: "/citizens",
-    subject: "citizens",
+    name: "Employers",
+    path: "/employers",
   },
   {
     icon: <FileIcon />,
-    name: "sidebar.registrations",
-    path: "/registrations",
-    subject: "registration",
+    name: "Job Demands",
+    path: "/demands",
   },
   {
-    icon: <InfoIcon />,
-    name: "sidebar.service_requests",
-    path: "/service-requests",
-    subject: "service_requests",
+    icon: <GroupIcon />,
+    name: "Candidates",
+    path: "/candidates",
   },
   {
-    icon: <AlertIcon />,
-    name: "sidebar.complaints",
-    path: "/complaints",
-    subject: "complaints",
+    icon: <CheckCircleIcon />,
+    name: "Pipelines",
+    path: "/pipelines",
   },
   {
     icon: <FolderIcon />,
-    name: "sidebar.correspondence",
-    path: "/correspondence",
-    subject: "correspondence",
+    name: "Contracts",
+    path: "/contracts",
+  },
+  {
+    icon: <PageIcon />,
+    name: "AI Parser",
+    path: "/tools/smart-parser",
+    subject: "AI",
+  },
+  {
+    icon: <GridIcon />,
+    name: "Agent Portal",
+    path: "/agent/dashboard",
   },
   {
     icon: <EnvelopeIcon />,
-    name: "sidebar.notifications",
+    name: "Notifications",
     path: "/notifications",
     subject: "notifications",
   },
   {
     icon: <GroupIcon />,
-    name: "sidebar.users",
+    name: "Users",
     path: "/users",
     subject: "users",
   },
   {
     icon: <CheckCircleIcon />,
-    name: "sidebar.roles",
+    name: "Roles",
     path: "/roles",
     subject: "rbac",
   },
   {
     icon: <ListIcon />,
-    name: "sidebar.audit_logs",
+    name: "Audit Logs",
     path: "/audit-logs",
     subject: "audit_logs",
   },
@@ -115,10 +105,10 @@ const navItems: NavItem[] = [
     subject: "FeatureFlag",
   },
   {
-    icon: <PageIcon />, // Re-using an icon for System Admin stuff
+    icon: <PageIcon />,
     name: "Tenants Admin",
     path: "/superadmindashboard",
-    subject: "all", // Only Master Admin has 'all' access
+    subject: "all",
     requiredRole: "platform_admin",
   },
   {
@@ -130,18 +120,6 @@ const navItems: NavItem[] = [
   },
   {
     icon: <GridIcon />,
-    name: "Wards",
-    path: "/system/wards",
-    subject: "system",
-  },
-  {
-    icon: <GridIcon />,
-    name: "Admin Dashboard",
-    path: "/administrator",
-    requiredRole: "cao", // Or could use municipality_admin
-  },
-  {
-    icon: <GridIcon />,
     name: "Branding",
     path: "/settings/branding",
   },
@@ -150,62 +128,9 @@ const navItems: NavItem[] = [
     name: "WhatsApp",
     path: "/settings/whatsapp",
   },
-  {
-    icon: <PieChartIcon />,
-    name: "Charts",
-    path: "#",
-    subItems: [
-      { name: "Bar Chart", path: "/bar-chart", pro: false },
-      { name: "Line Chart", path: "/line-chart", pro: false },
-      { name: "Pie Chart", path: "/pie-chart", pro: false },
-    ],
-  },
 ];
 
-const departmentItems: NavItem[] = [
-  {
-    icon: <InfoIcon />,
-    name: "sidebar.health",
-    path: "/departments/health",
-    subject: "health",
-  },
-  {
-    icon: <PageIcon />,
-    name: "sidebar.education",
-    path: "/departments/education",
-    subject: "education",
-  },
-  {
-    icon: <BoxCubeIcon />,
-    name: "sidebar.infrastructure",
-    path: "/departments/infrastructure",
-    subject: "infrastructure",
-  },
-  {
-    icon: <GridIcon />,
-    name: "sidebar.agriculture",
-    path: "/departments/agriculture",
-    subject: "agriculture",
-  },
-  {
-    icon: <PieChartIcon />,
-    name: "sidebar.finance",
-    path: "/departments/finance",
-    subject: "finance",
-  },
-  {
-    icon: <FileIcon />,
-    name: "sidebar.administrative",
-    path: "/departments/administrative",
-    subject: "administrative",
-  },
-  {
-    icon: <AlertIcon />,
-    name: "sidebar.disaster_management",
-    path: "/departments/disaster-management",
-    subject: "disaster_management",
-  },
-];
+const departmentItems: NavItem[] = [];
 
 import { Can } from "../context/AbilityContext";
 
@@ -516,22 +441,7 @@ const AppSidebar: React.FC = () => {
               </h2>
               {renderMenuItems(navItems, "main")}
             </div>
-            <div className="">
-              <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
-                  !isExpanded && !isHovered
-                    ? "lg:justify-center"
-                    : "justify-start"
-                }`}
-              >
-                {isExpanded || isHovered || isMobileOpen ? (
-                  t('sidebar.departments')
-                ) : (
-                  <HorizontaLDots />
-                )}
-              </h2>
-              {renderMenuItems(departmentItems, "departments")}
-            </div>
+
           </div>
         </nav>
         {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null}

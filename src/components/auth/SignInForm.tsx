@@ -35,8 +35,6 @@ export default function SignInForm() {
         
         if (user.rolesSlugs?.includes("platform_admin")) {
           navigate("/superadmindashboard");
-        } else if (user.rolesSlugs?.includes("cao") || user.rolesSlugs?.includes("municipality_admin")) {
-          navigate("/administrator");
         } else {
           navigate("/dashboard");
         }
@@ -141,7 +139,7 @@ export default function SignInForm() {
 
             <div className="mt-5">
               <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
-                For account creation, please contact your municipality administrator.
+                For account creation, please contact your agency administrator.
               </p>
             </div>
           </div>

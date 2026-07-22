@@ -4,7 +4,7 @@ import { useAuth } from "./AuthContext";
 
 export interface FeatureFlag {
   _id: string;
-  municipalityId?: string;
+  tenantId?: string;
   key: string;
   name: string;
   description: string;

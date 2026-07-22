@@ -7,7 +7,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  municipalityId: string;
+  tenantId: string;
   roles: string[];
   wardId?: string;
   image?: string;

@@ -38,11 +38,6 @@ import TermsOfServicePage from "./pages/Marketing/TermsOfServicePage";
 import RegisterAgency from "./pages/Onboarding/RegisterAgency";
 import Users from "./pages/Users/Users";
 import Roles from "./pages/Users/Roles";
-import Citizens from "./pages/Citizens/Citizens";
-import Registrations from "./pages/Registrations/Registrations";
-import ServiceRequests from "./pages/Services/ServiceRequests";
-import Complaints from "./pages/Services/Complaints";
-import Correspondence from "./pages/Correspondence/Correspondence";
 import Notifications from "./pages/Notifications/Notifications";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import AuditLogs from "./pages/AuditLogs/AuditLogs";
@@ -51,13 +46,6 @@ import SmartDocumentParser from "./pages/Tools/SmartDocumentParser";
 import AgentDashboard from "./pages/AgentPortal/AgentDashboard";
 import AgentCandidates from "./pages/AgentPortal/AgentCandidates";
 import AgentCommissions from "./pages/AgentPortal/AgentCommissions";
-import Health from "./pages/Departments/Health";
-import Education from "./pages/Departments/Education";
-import Infrastructure from "./pages/Departments/Infrastructure";
-import Agriculture from "./pages/Departments/Agriculture";
-import Finance from "./pages/Departments/Finance";
-import Administrative from "./pages/Departments/Administrative";
-import DisasterManagement from "./pages/Departments/DisasterManagement";
 import Approvals from "./pages/Approvals/Approvals";
 import FeatureFlagsAdmin from "./pages/System/FeatureFlagsAdmin";
 import BrandingSettings from "./pages/System/BrandingSettings";
@@ -66,12 +54,7 @@ import SuperAdminDashboard from "./pages/System/SuperAdminDashboard";
 import Billing from "./pages/System/Billing";
 import BillingVerify from "./pages/System/BillingVerify";
 import PlatformBilling from "./pages/System/PlatformBilling";
-import WardsAdmin from "./pages/System/WardsAdmin";
 import WhatsAppIntegration from "./pages/System/WhatsAppIntegration";
-
-import GhatanaDarta from "./pages/GhatanaDarta/GhatanaDarta";
-import TaxEngine from "./pages/Tax/TaxEngine";
-import CitizenTrack from "./pages/Citizen/CitizenTrack";
 import VerifyDocument from "./pages/Public/VerifyDocument";
 import SignContract from "./pages/Public/SignContract";
 import { SocketProvider } from "./context/SocketContext";
@@ -129,11 +112,6 @@ export default function App() {
                   
                   <Route path="/users" element={<ProtectedRoute action="read" subject="users"><Users /></ProtectedRoute>} />
                   <Route path="/roles" element={<ProtectedRoute action="read" subject="rbac"><Roles /></ProtectedRoute>} />
-                  <Route path="/citizens" element={<ProtectedRoute action="read" subject="citizens"><Citizens /></ProtectedRoute>} />
-                  <Route path="/registrations" element={<ProtectedRoute action="read" subject="registration"><Registrations /></ProtectedRoute>} />
-                  <Route path="/service-requests" element={<ProtectedRoute action="read" subject="service_requests"><ServiceRequests /></ProtectedRoute>} />
-                  <Route path="/complaints" element={<ProtectedRoute action="read" subject="complaints"><Complaints /></ProtectedRoute>} />
-                  <Route path="/correspondence" element={<ProtectedRoute action="read" subject="correspondence"><Correspondence /></ProtectedRoute>} />
                   <Route path="/notifications" element={<ProtectedRoute action="read" subject="notifications"><Notifications /></ProtectedRoute>} />
                   <Route path="/audit-logs" element={<ProtectedRoute action="read" subject="audit_logs"><AuditLogs /></ProtectedRoute>} />
                   <Route path="/demands/:id/pipeline" element={<ProtectedRoute action="read" subject="dashboard"><PipelineBoard /></ProtectedRoute>} />
@@ -143,7 +121,6 @@ export default function App() {
                   <Route path="/superadmindashboard" element={<ProtectedRoute action="manage" subject="all"><SuperAdminDashboard /></ProtectedRoute>} />
                   <Route path="/system/tenants" element={<ProtectedRoute action="manage" subject="all"><SuperAdminDashboard /></ProtectedRoute>} />
                   <Route path="/system/billing-admin" element={<ProtectedRoute action="manage" subject="all"><PlatformBilling /></ProtectedRoute>} />
-                  <Route path="/system/wards" element={<ProtectedRoute action="manage" subject="system"><WardsAdmin /></ProtectedRoute>} />
                   <Route path="/settings/branding" element={<ProtectedRoute><BrandingSettings /></ProtectedRoute>} />
                   <Route path="/settings/whatsapp" element={<ProtectedRoute><WhatsAppIntegration /></ProtectedRoute>} />
 
@@ -159,19 +136,7 @@ export default function App() {
                   <Route path="/billing" element={<Billing />} />
                   <Route path="/billing/verify" element={<BillingVerify />} />
 
-                  {/* Core Municipality */}
-                  <Route path="/ghatana-darta" element={<ProtectedRoute action="read" subject="VitalEvent"><GhatanaDarta /></ProtectedRoute>} />
-                  <Route path="/tax-engine" element={<ProtectedRoute action="read" subject="Finance"><TaxEngine /></ProtectedRoute>} />
-
                   {/* Settings */}
-                  {/* Departments */}
-                  <Route path="/departments/health" element={<ProtectedRoute action="read" subject="health"><Health /></ProtectedRoute>} />
-                  <Route path="/departments/education" element={<ProtectedRoute action="read" subject="education"><Education /></ProtectedRoute>} />
-                  <Route path="/departments/infrastructure" element={<ProtectedRoute action="read" subject="infrastructure"><Infrastructure /></ProtectedRoute>} />
-                  <Route path="/departments/agriculture" element={<ProtectedRoute action="read" subject="agriculture"><Agriculture /></ProtectedRoute>} />
-                  <Route path="/departments/finance" element={<ProtectedRoute action="read" subject="finance"><Finance /></ProtectedRoute>} />
-                  <Route path="/departments/administrative" element={<ProtectedRoute action="read" subject="administrative"><Administrative /></ProtectedRoute>} />
-                  <Route path="/departments/disaster-management" element={<ProtectedRoute action="read" subject="disaster_management"><DisasterManagement /></ProtectedRoute>} />
 
                   {/* Forms */}
                   <Route path="/form-elements" element={<FormElements />} />
@@ -193,8 +158,7 @@ export default function App() {
                   <Route path="/pie-chart" element={<PieChart />} />
                 </Route>
 
-                {/* Public Citizen Portal */}
-                <Route path="/citizen/track" element={<CitizenTrack />} />
+                {/* Public Portal */}
                 <Route path="/verify/:hash" element={<VerifyDocument />} />
                 <Route path="/sign/:id" element={<SignContract />} />
 

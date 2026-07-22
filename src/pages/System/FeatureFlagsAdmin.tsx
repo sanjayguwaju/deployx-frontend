@@ -81,7 +81,7 @@ const FeatureFlagsAdmin = () => {
   };
 
   const handleToggleFlag = async (tenantId: string, flagDef: { key: string; name: string; description: string }) => {
-    const existingFlag = flags.find((f) => f.municipalityId === tenantId && f.key === flagDef.key);
+    const existingFlag = flags.find((f) => f.tenantId === tenantId && f.key === flagDef.key);
     const operationId = `${tenantId}-${flagDef.key}`;
     setIsProcessing(operationId);
 
@@ -91,7 +91,7 @@ const FeatureFlagsAdmin = () => {
         toast.success(existingFlag.isActive ? "Flag disabled for tenant." : "Flag enabled for tenant.");
       } else {
         await axios.post("/feature-flags", {
-          municipalityId: tenantId,
+          tenantId: tenantId,
           key: flagDef.key,
           name: flagDef.name,
           description: flagDef.description,
@@ -157,7 +157,7 @@ const FeatureFlagsAdmin = () => {
           ),
           cell: (info) => {
             const tenant = info.row.original;
-            const existingFlag = flags.find((f) => f.municipalityId === tenant._id && f.key === flagDef.key);
+            const existingFlag = flags.find((f) => f.tenantId === tenant._id && f.key === flagDef.key);
             const isActive = existingFlag?.isActive || false;
             const operationId = `${tenant._id}-${flagDef.key}`;
             const isWorking = isProcessing === operationId;
