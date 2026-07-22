@@ -1,74 +1,76 @@
-import { Users, FileCheck, Brain, Globe, Shield, BarChart2 } from "lucide-react";
+import React from 'react';
 
-export default function FeaturesPage() {
-  const features = [
-    {
-      icon: <Users className="w-6 h-6" />,
-      color: "blue",
-      title: "Candidate CRM",
-      description: "A full 360° profile for every worker — skills, documents, employment history, medical status, and pipeline stage — all searchable and filterable in real time.",
-    },
-    {
-      icon: <Globe className="w-6 h-6" />,
-      color: "green",
-      title: "Employer & Demand Management",
-      description: "Manage foreign employer accounts, job demands, quotas, and required qualifications. Match candidates to open demands instantly with AI-powered scoring.",
-    },
-    {
-      icon: <FileCheck className="w-6 h-6" />,
-      color: "purple",
-      title: "Automated Deployment Pipeline",
-      description: "Move candidates through Medical → Visa → Ticket → Deployment with automated gate checks, compliance validation, and real-time status tracking.",
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      color: "red",
-      title: "Contracts & Compliance",
-      description: "Generate, e-sign, and store employment contracts. Track license renewals, compliance checks, and government-mandated documents with expiry alerts.",
-    },
-    {
-      icon: <BarChart2 className="w-6 h-6" />,
-      color: "yellow",
-      title: "Finance & Commission Engine",
-      description: "Issue invoices to employers, track service charges and expenses, calculate agent commissions automatically, and export financial reports for auditing.",
-    },
-    {
-      icon: <Brain className="w-6 h-6" />,
-      color: "teal",
-      title: "AI Matching & OCR",
-      description: "Automatically extract data from passports and visas using AI OCR. Match candidates to demands by skill similarity score. Ask your data in plain English using the AI Assistant.",
-    },
-  ];
-
-  const colorMap: Record<string, string> = {
-    blue: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400",
-    green: "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400",
-    purple: "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400",
-    red: "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400",
-    yellow: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400",
-    teal: "bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400",
-  };
-
+const FeaturesPage: React.FC = () => {
   return (
-    <div className="py-24 bg-gray-50 dark:bg-gray-900/50 min-h-screen">
+    <div className="bg-white dark:bg-boxdark-2 py-20 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl">Everything your agency needs</h1>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">Replace dozens of disconnected tools — spreadsheets, WhatsApp groups, and paper files — with one unified recruitment operating system.</p>
+          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight sm:text-5xl">
+            Everything you need to run a modern manpower agency
+          </h1>
+          <p className="mt-4 text-xl text-gray-500 dark:text-gray-400">
+            DeployX replaces your scattered spreadsheets, WhatsApp chats, and paper files with a single, intelligent CRM.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((f) => (
-            <div key={f.title} className="bg-white dark:bg-gray-800 p-8 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-xs hover:shadow-md transition-shadow">
-              <div className={`w-12 h-12 ${colorMap[f.color]} rounded-xl flex items-center justify-center mb-6`}>
-                {f.icon}
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{f.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{f.description}</p>
+          {/* Feature 1 */}
+          <div className="bg-gray-50 dark:bg-boxdark rounded-2xl p-8 border border-gray-100 dark:border-strokedark">
+            <div className="text-brand-600 dark:text-brand-400 mb-4">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002 2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
             </div>
-          ))}
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Kanban Pipeline</h3>
+            <p className="text-gray-600 dark:text-gray-400">Drag and drop candidates across stages like Medical, Visa, and Ticket. Instantly see your deployment bottlenecks.</p>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="bg-gray-50 dark:bg-boxdark rounded-2xl p-8 border border-gray-100 dark:border-strokedark">
+            <div className="text-brand-600 dark:text-brand-400 mb-4">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Smart OCR Parsing</h3>
+            <p className="text-gray-600 dark:text-gray-400">Stop typing passport numbers. Upload a scan and our AI Vision model extracts the data with 99% accuracy.</p>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="bg-gray-50 dark:bg-boxdark rounded-2xl p-8 border border-gray-100 dark:border-strokedark">
+            <div className="text-brand-600 dark:text-brand-400 mb-4">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Native e-Signatures</h3>
+            <p className="text-gray-600 dark:text-gray-400">Generate employment contracts and send them via a public link for mobile-friendly digital signatures.</p>
+          </div>
+
+          {/* Feature 4 */}
+          <div className="bg-gray-50 dark:bg-boxdark rounded-2xl p-8 border border-gray-100 dark:border-strokedark">
+            <div className="text-brand-600 dark:text-brand-400 mb-4">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">WhatsApp Automation</h3>
+            <p className="text-gray-600 dark:text-gray-400">Automated WhatsApp notifications to candidates when their visa is approved or their flight is booked.</p>
+          </div>
+
+          {/* Feature 5 */}
+          <div className="bg-gray-50 dark:bg-boxdark rounded-2xl p-8 border border-gray-100 dark:border-strokedark">
+            <div className="text-brand-600 dark:text-brand-400 mb-4">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Sub-Agent Portals</h3>
+            <p className="text-gray-600 dark:text-gray-400">Provide brokers their own login to submit candidates and view their commission ledger in real-time.</p>
+          </div>
+          
+          {/* Feature 6 */}
+          <div className="bg-gray-50 dark:bg-boxdark rounded-2xl p-8 border border-gray-100 dark:border-strokedark">
+            <div className="text-brand-600 dark:text-brand-400 mb-4">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Automated PDFs</h3>
+            <p className="text-gray-600 dark:text-gray-400">Generate beautiful PDF invoices, flight tickets, and reports on the fly directly from the backend.</p>
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default FeaturesPage;

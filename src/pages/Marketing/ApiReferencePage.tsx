@@ -80,7 +80,7 @@ export default function ApiReferencePage() {
             <section>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Users Endpoint</h2>
               <p className="text-gray-600 dark:text-gray-400 text-lg mb-8 leading-relaxed">
-                The Users API allows you to programmatically manage staff accounts within your municipality.
+                The Users API allows you to programmatically manage staff accounts within your agency.
               </p>
 
               <div className="space-y-4">

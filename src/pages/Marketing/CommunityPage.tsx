@@ -103,7 +103,7 @@ export default function CommunityPage() {
                 </li>
                 <li className="flex items-start">
                   <div className="h-7 w-7 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center font-bold text-sm mr-4 mt-0.5 shrink-0">✓</div>
-                  <span className="text-gray-700 dark:text-gray-300 text-lg">Keep discussions constructive and focused on municipality governance and technology.</span>
+                  <span className="text-gray-700 dark:text-gray-300 text-lg">Keep discussions constructive and focused on recruitment and technology.</span>
                 </li>
               </ul>
               <a href="#" className="inline-flex items-center justify-center px-8 py-4 border border-gray-300 dark:border-gray-600 shadow-sm text-base font-bold rounded-xl text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">

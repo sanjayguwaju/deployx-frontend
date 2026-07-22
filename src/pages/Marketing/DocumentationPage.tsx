@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const categories = [
   {
     title: "Getting Started",
-    description: "Learn the basics of DeployX and set up your municipality profile.",
+    description: "Learn the basics of DeployX and set up your agency profile.",
     icon: BookOpen,
     color: "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
   },

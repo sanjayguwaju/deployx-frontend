@@ -3,7 +3,7 @@ export default function ContactPage() {
     <div className="py-24 bg-white dark:bg-gray-900 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl mb-6">Contact Sales & Support</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-12">Have questions about DeployX? Our team is here to help you digitally transform your municipality.</p>
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-12">Have questions about DeployX? Our team is here to help you digitally transform your manpower agency.</p>
         
         <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 text-left">
           <form className="space-y-6">
@@ -18,7 +18,7 @@ export default function ContactPage() {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Municipality / Organization</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Agency / Organization</label>
               <input type="text" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
             </div>
             <div>

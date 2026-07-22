@@ -47,7 +47,7 @@ export default function DocumentationArticlePage() {
 
           <h2>Default Roles</h2>
           <p>
-            When you register your municipality on DeployX, several default roles are automatically provisioned:
+            When you register your agency on DeployX, several default roles are automatically provisioned:
           </p>
           
           <div className="overflow-x-auto my-8">
@@ -62,7 +62,7 @@ export default function DocumentationArticlePage() {
               <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
                 <tr>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Super Admin</td>
-                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Full access to the entire municipality portal.</td>
+                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Full access to the entire agency portal.</td>
                   <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">All permissions</td>
                 </tr>
                 <tr>
