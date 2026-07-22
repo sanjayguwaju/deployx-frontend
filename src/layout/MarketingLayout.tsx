@@ -27,7 +27,7 @@ const MarketingLayout: React.FC = () => {
 
             {/* Auth Buttons */}
             <div className="flex items-center space-x-4">
-              <Link to="/auth/signin" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition">
+              <Link to="/signin" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition">
                 Sign In
               </Link>
               <Link to="/register" className="bg-brand-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-brand-700 transition shadow-sm">
