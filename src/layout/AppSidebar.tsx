@@ -107,7 +107,7 @@ const navItems: NavItem[] = [
   {
     icon: <PageIcon />,
     name: "Tenants Admin",
-    path: "/superadmindashboard",
+    path: "/superadmin",
     subject: "all",
     requiredRole: "platform_admin",
   },

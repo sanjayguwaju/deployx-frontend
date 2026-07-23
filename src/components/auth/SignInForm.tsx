@@ -34,7 +34,9 @@ export default function SignInForm() {
         toast.success("Signed in successfully!");
         
         if (user.rolesSlugs?.includes("platform_admin")) {
-          navigate("/superadmindashboard");
+          navigate("/superadmin");
+        } else if (user.rolesSlugs?.includes("tenant_admin")) {
+          navigate("/admin");
         } else {
           navigate("/dashboard");
         }

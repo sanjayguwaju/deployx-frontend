@@ -123,8 +123,8 @@ export default function App() {
                   <Route path="/demands/:id/pipeline" element={<ProtectedRoute action="read" subject="dashboard"><PipelineBoard /></ProtectedRoute>} />
                   <Route path="/approvals" element={<ProtectedRoute action="read" subject="ApprovableDocument"><Approvals /></ProtectedRoute>} />
                   <Route path="/feature-flags" element={<ProtectedRoute action="manage" subject="FeatureFlag"><FeatureFlagsAdmin /></ProtectedRoute>} />
-                  <Route path="/administrator" element={<ProtectedRoute><TenantAdminDashboard /></ProtectedRoute>} />
-                  <Route path="/superadmindashboard" element={<ProtectedRoute action="manage" subject="all"><SuperAdminDashboard /></ProtectedRoute>} />
+                  <Route path="/admin" element={<ProtectedRoute><TenantAdminDashboard /></ProtectedRoute>} />
+                  <Route path="/superadmin" element={<ProtectedRoute action="manage" subject="all"><SuperAdminDashboard /></ProtectedRoute>} />
                   <Route path="/system/tenants" element={<ProtectedRoute action="manage" subject="all"><SuperAdminDashboard /></ProtectedRoute>} />
                   <Route path="/system/billing-admin" element={<ProtectedRoute action="manage" subject="all"><PlatformBilling /></ProtectedRoute>} />
                   <Route path="/settings/branding" element={<ProtectedRoute><BrandingSettings /></ProtectedRoute>} />
