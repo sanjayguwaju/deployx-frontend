@@ -11,7 +11,7 @@ interface Tenant {
   subdomain: string;
   code: string;
   type: string;
-  status: "pending" | "approved" | "rejected";
+  status: "pending" | "approved" | "rejected" | "trial" | "active" | "suspended" | "cancelled";
   createdAt: string;
 }
 
@@ -49,8 +49,9 @@ export const EditTenantModal: React.FC<EditTenantModalProps> = ({ isOpen, onClos
         onSuccess();
         onClose();
       }
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to update tenant");
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to update tenant";
+      toast.error(msg);
     } finally {
       setIsSaving(false);
     }

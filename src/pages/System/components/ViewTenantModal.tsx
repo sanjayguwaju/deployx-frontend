@@ -8,7 +8,7 @@ interface Tenant {
   subdomain: string;
   code: string;
   type: string;
-  status: "pending" | "approved" | "rejected";
+  status: "pending" | "approved" | "rejected" | "trial" | "active" | "suspended" | "cancelled";
   createdAt: string;
 }
 

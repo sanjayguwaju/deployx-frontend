@@ -33,9 +33,9 @@ export default function SignInForm() {
         login(accessToken, user);
         toast.success("Signed in successfully!");
         
-        if (user.rolesSlugs?.includes("platform_admin")) {
+        if (user.roles?.includes("platform_admin")) {
           navigate("/superadmin");
-        } else if (user.rolesSlugs?.includes("tenant_admin")) {
+        } else if (user.roles?.includes("tenant_admin")) {
           navigate("/admin");
         } else {
           navigate("/dashboard");
@@ -45,8 +45,10 @@ export default function SignInForm() {
         setError(msg);
         toast.error(msg);
       }
-    } catch (err: any) {
-      const msg = err.response?.data?.message || "An error occurred during sign in.";
+    } catch (err: unknown) {
+      type AxiosLike = { response?: { data?: { message?: string } }; message?: string };
+      const axiosErr = err as AxiosLike;
+      const msg = axiosErr?.response?.data?.message || axiosErr?.message || "An error occurred during sign in.";
       setError(msg);
       toast.error(msg);
     } finally {

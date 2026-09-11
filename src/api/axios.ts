@@ -6,6 +6,7 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
   withCredentials: true, // For receiving and sending cookies if configured
+  timeout: 30000, // 30s — prevents UI from hanging on slow Atlas/Redis cold starts
 });
 
 // Add a request interceptor to inject the token and subdomain

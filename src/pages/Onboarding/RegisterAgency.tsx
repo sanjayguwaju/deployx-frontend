@@ -10,6 +10,7 @@ export default function RegisterAgency() {
     adminName: "",
     adminEmail: "",
     adminPhone: "",
+    adminPassword: "",
     plan: "pro", // Default selected plan
   });
   
@@ -38,15 +39,21 @@ export default function RegisterAgency() {
     setError(null);
     
     try {
-      const response = await api.post("/registration/tenant", formData);
+      const response = await api.post("/onboarding/register", formData);
       if (response.data.success) {
         setSuccess(true);
         setTimeout(() => {
-          window.location.href = `http://${formData.subdomain}.deployx.io/signin`;
+          const baseUrl = import.meta.env.VITE_APP_BASE_URL || "http://localhost:5173";
+          // In production, VITE_APP_BASE_URL=https://deployx.io → subdomain.deployx.io/signin
+          // In dev, redirects to localhost:5173/signin
+          const redirectUrl = baseUrl.includes("localhost")
+            ? `${baseUrl}/signin`
+            : `${baseUrl.replace("://", `://${formData.subdomain}.`)}/signin`;
+          window.location.href = redirectUrl;
         }, 5000);
       }
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to register agency");
+    } catch (err: unknown) {
+      setError((err instanceof Error && (err as { response?: { data?: { message?: string } } }).response?.data?.message) || "Failed to register agency");
     } finally {
       setLoading(false);
     }
@@ -56,7 +63,7 @@ export default function RegisterAgency() {
     <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col md:flex-row">
       {/* Left Column - Branding */}
       <div className="hidden md:flex w-full md:w-1/2 bg-brand-950 p-12 flex-col justify-between relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-800/40 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--tw-gradient-stops))] from-brand-800/40 via-transparent to-transparent"></div>
         
         <div className="relative z-10">
           <Link to="/" className="flex items-center space-x-2 mb-16">
@@ -114,7 +121,12 @@ export default function RegisterAgency() {
                 Your agency workspace has been created successfully. We are redirecting you to your new dedicated dashboard...
               </p>
               <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">
-                http://{formData.subdomain}.deployx.io/signin
+                {(() => {
+                  const baseUrl = import.meta.env.VITE_APP_BASE_URL || "http://localhost:5173";
+                  return baseUrl.includes("localhost")
+                    ? `${baseUrl}/signin`
+                    : `${baseUrl.replace("://", `://${formData.subdomain}.`)}/signin`;
+                })()}
               </div>
               <div className="mt-8">
                 <div className="animate-spin w-6 h-6 border-2 border-brand-500 border-t-transparent rounded-full mx-auto"></div>
@@ -215,6 +227,20 @@ export default function RegisterAgency() {
                         placeholder="+977 9800000000"
                       />
                     </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                    <input
+                      type="password"
+                      name="adminPassword"
+                      value={formData.adminPassword}
+                      onChange={handleInputChange}
+                      required
+                      minLength={6}
+                      className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 text-gray-900 dark:text-white focus:border-brand-500 focus:ring-brand-500"
+                      placeholder="Min. 6 characters"
+                    />
                   </div>
                 </div>
 

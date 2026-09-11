@@ -22,7 +22,8 @@ interface Tenant {
   subdomain: string;
   code: string;
   type: string;
-  status: "pending" | "approved" | "rejected";
+  plan?: string;
+  status: "pending" | "approved" | "rejected" | "trial" | "active" | "suspended" | "cancelled";
   createdAt: string;
 }
 
@@ -49,7 +50,7 @@ export default function TenantsAdmin() {
 
   useEffect(() => {
     fetchTenants(currentPage, limit, searchQuery);
-  }, [currentPage, limit]);
+  }, [currentPage, limit, searchQuery]);
 
   // Debounced Search Effect
   useEffect(() => {
@@ -58,7 +59,7 @@ export default function TenantsAdmin() {
       fetchTenants(1, limit, searchQuery);
     }, 500);
     return () => clearTimeout(timer);
-  }, [searchQuery]);
+  }, [searchQuery, limit]);
 
   const fetchTenants = async (page = 1, pageLimit = 10, search = "") => {
     try {
@@ -70,8 +71,9 @@ export default function TenantsAdmin() {
           setMeta(res.data.meta);
         }
       }
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to fetch tenants");
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to fetch tenants";
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
@@ -84,11 +86,12 @@ export default function TenantsAdmin() {
       if (res.data.success) {
         toast.success(`Tenant marked as ${newStatus}`);
         setTenants((prev) =>
-          prev.map((t) => (t._id === id ? { ...t, status: newStatus as any } : t))
+          prev.map((t) => (t._id === id ? { ...t, status: newStatus as Tenant["status"] } : t))
         );
       }
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to update tenant");
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to update tenant";
+      toast.error(msg);
     } finally {
       setUpdating(null);
     }
@@ -103,8 +106,9 @@ export default function TenantsAdmin() {
         toast.success("Tenant deleted successfully");
         fetchTenants(currentPage, limit, searchQuery);
       }
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to delete tenant");
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to delete tenant";
+      toast.error(msg);
     } finally {
       setUpdating(null);
       setDeleteModalOpen(false);
@@ -198,19 +202,19 @@ export default function TenantsAdmin() {
     }),
     columnHelper.accessor("status", {
       header: "Status",
-      cell: (info) => {
-        const status = info.getValue();
+      cell: ({ getValue }) => {
+        const status = getValue();
+        const statusColorMap: Record<string, "success" | "error" | "warning" | "info" | "primary"> = {
+          approved: "success",
+          active: "success",
+          rejected: "error",
+          suspended: "error",
+          cancelled: "error",
+          trial: "info",
+          pending: "warning",
+        };
         return (
-          <Badge
-            size="sm"
-            color={
-              status === "approved"
-                ? "success"
-                : status === "rejected"
-                ? "error"
-                : "warning"
-            }
-          >
+          <Badge size="sm" color={statusColorMap[status] ?? "warning"}>
             {status.charAt(0).toUpperCase() + status.slice(1)}
           </Badge>
         );
@@ -234,7 +238,7 @@ export default function TenantsAdmin() {
               <DropdownMenu.Portal>
                 <DropdownMenu.Content
                   align="end"
-                  className="z-50 min-w-[160px] rounded-xl border border-gray-200 bg-white p-2 shadow-theme-lg outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 dark:border-gray-800 dark:bg-gray-dark"
+                  className="z-50 min-w-40 rounded-xl border border-gray-200 bg-white p-2 shadow-theme-lg outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 dark:border-gray-800 dark:bg-gray-dark"
                 >
                   <DropdownMenu.Item asChild>
                     <button
@@ -292,7 +296,7 @@ export default function TenantsAdmin() {
         );
       },
     }),
-  ], []);
+  ], [columnHelper]);
 
   const table = useReactTable({
     data: tenants,
