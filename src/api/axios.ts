@@ -31,7 +31,7 @@ api.interceptors.request.use(
     }
 
     // Ignore 'app' or 'www' subdomains as they might be used for the naked/landing page
-    if (subdomain && !["app", "www", "deployx", "deployxos"].includes(subdomain)) {
+    if (subdomain && !["app", "www", "deployx", "deployxos", "depolyx"].includes(subdomain)) {
       config.headers["X-Tenant-Subdomain"] = subdomain;
     }
 
