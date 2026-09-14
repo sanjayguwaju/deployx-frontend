@@ -13,12 +13,12 @@ export const FormModal: React.FC<FormModalProps> = ({
   onClose,
   title,
   children,
-  className = "max-w-2xl",
+  className = "max-w-4xl",
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} className={`w-full ${className}`}>
-      <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-gray-700">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+      <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4 dark:border-gray-800">
+        <h3 className="text-base font-semibold text-gray-900 dark:text-white">
           {title}
         </h3>
       </div>

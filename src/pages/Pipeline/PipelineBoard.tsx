@@ -741,7 +741,7 @@ export default function PipelineBoard() {
       {/* Modal: Enroll Candidate */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-boxdark rounded-xl max-w-md w-full p-5 shadow-2xl border border-gray-200 dark:border-strokedark">
+          <div className="bg-white dark:bg-boxdark rounded-xl max-w-2xl w-full p-5 shadow-2xl border border-gray-200 dark:border-strokedark">
             <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-strokedark">
               <div className="flex items-center gap-2">
                 <UserCheck className="w-4 h-4 text-brand-500" />
@@ -757,7 +757,7 @@ export default function PipelineBoard() {
               </button>
             </div>
 
-            <form onSubmit={handleSubmitAdd} className="mt-4 space-y-3.5 text-xs">
+            <form onSubmit={handleSubmitAdd} className="mt-4 space-y-4 text-xs">
               {/* Target Demand Info */}
               <div className="p-2.5 bg-gray-50 dark:bg-meta-4 rounded-lg border border-gray-200 dark:border-strokedark">
                 <span className="text-[11px] text-gray-400 block mb-0.5">Selected Job Demand:</span>
@@ -771,49 +771,52 @@ export default function PipelineBoard() {
                 )}
               </div>
 
-              {/* Candidate Picker */}
-              <div>
-                <label className="block font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Select Candidate <span className="text-red-500">*</span>
-                </label>
-                <select
-                  required
-                  value={selectedCandidateId}
-                  onChange={(e) => setSelectedCandidateId(e.target.value)}
-                  className="w-full bg-white dark:bg-boxdark border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-xs text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 focus:outline-none"
-                >
-                  <option value="">-- Choose Candidate --</option>
-                  {candidatesList.map((c) => {
-                    const isAlreadyEnrolled = enrolledCandidateIds.has(c._id);
-                    return (
-                      <option
-                        key={c._id}
-                        value={c._id}
-                        disabled={isAlreadyEnrolled}
-                      >
-                        {c.firstName} {c.lastName} {c.profession ? `(${c.profession})` : ""} {c.passportNumber ? `[Passport: ${c.passportNumber}]` : ""} {isAlreadyEnrolled ? "— (Already in Pipeline)" : ""}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
+              {/* Candidate Picker and Stage Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Candidate Picker */}
+                <div>
+                  <label className="block font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Select Candidate <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    required
+                    value={selectedCandidateId}
+                    onChange={(e) => setSelectedCandidateId(e.target.value)}
+                    className="w-full bg-white dark:bg-boxdark border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-xs text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                  >
+                    <option value="">-- Choose Candidate --</option>
+                    {candidatesList.map((c) => {
+                      const isAlreadyEnrolled = enrolledCandidateIds.has(c._id);
+                      return (
+                        <option
+                          key={c._id}
+                          value={c._id}
+                          disabled={isAlreadyEnrolled}
+                        >
+                          {c.firstName} {c.lastName} {c.profession ? `(${c.profession})` : ""} {c.passportNumber ? `[${c.passportNumber}]` : ""} {isAlreadyEnrolled ? "— (Enrolled)" : ""}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
 
-              {/* Initial Stage */}
-              <div>
-                <label className="block font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Initial Stage
-                </label>
-                <select
-                  value={initialStage}
-                  onChange={(e) => setInitialStage(e.target.value)}
-                  className="w-full bg-white dark:bg-boxdark border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-xs text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 focus:outline-none"
-                >
-                  {STAGES.map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.label}
-                    </option>
-                  ))}
-                </select>
+                {/* Initial Stage */}
+                <div>
+                  <label className="block font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Initial Stage
+                  </label>
+                  <select
+                    value={initialStage}
+                    onChange={(e) => setInitialStage(e.target.value)}
+                    className="w-full bg-white dark:bg-boxdark border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-xs text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                  >
+                    {STAGES.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               {/* Notes */}
@@ -855,7 +858,7 @@ export default function PipelineBoard() {
       {/* Modal: Stage Progression History */}
       {historyRecord && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-boxdark rounded-xl max-w-md w-full p-5 shadow-2xl border border-gray-200 dark:border-strokedark max-h-[85vh] flex flex-col">
+          <div className="bg-white dark:bg-boxdark rounded-xl max-w-xl w-full p-5 shadow-2xl border border-gray-200 dark:border-strokedark max-h-[85vh] flex flex-col">
             <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-strokedark flex-shrink-0">
               <div className="flex items-center gap-2">
                 <History className="w-4 h-4 text-blue-500" />

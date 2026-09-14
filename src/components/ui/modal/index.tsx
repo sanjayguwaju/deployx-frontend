@@ -20,7 +20,7 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   const contentClasses = isFullscreen
     ? "w-full h-full rounded-none"
-    : "relative w-full rounded-3xl bg-white shadow-xl border border-gray-200 dark:border-gray-800 dark:bg-gray-900";
+    : "relative w-full rounded-xl bg-white shadow-2xl border border-gray-200 dark:border-gray-800 dark:bg-gray-900";
 
   return (
     <DialogPrimitive.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
