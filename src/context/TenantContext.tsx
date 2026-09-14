@@ -1,10 +1,20 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import api from "../api/axios";
 
-interface TenantBranding {
+export interface TenantBranding {
   name: string;
   logoUrl: string | null;
+  faviconUrl?: string | null;
+  licenseNumber?: string | null;
+  tagline?: string | null;
+  customDomain?: string | null;
+  emailSenderName?: string | null;
+  contactEmail?: string | null;
+  contactPhone?: string | null;
+  address?: string | null;
+  hidePoweredBy?: boolean;
   primaryColor: string;
+  secondaryColor?: string;
 }
 
 interface TenantContextType {
@@ -41,8 +51,17 @@ export const TenantProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         if (res.data.data.primaryColor) {
           const hex = res.data.data.primaryColor;
           document.documentElement.style.setProperty("--color-brand-500", hex);
-          // Optional: approximate a darker variant for hover states (e.g. brand-600)
-          // We can just rely on opacity or a generic darker override if needed.
+        }
+
+        // Dynamically inject favicon if customized
+        if (res.data.data.faviconUrl) {
+          let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']");
+          if (!link) {
+            link = document.createElement("link");
+            link.rel = "icon";
+            document.head.appendChild(link);
+          }
+          link.href = res.data.data.faviconUrl;
         }
       }
     } catch (error) {
