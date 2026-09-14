@@ -8,10 +8,11 @@ interface BroadcastModalProps {
 }
 
 const ROLES = [
-  { value: "all", label: "All Users" },
-  { value: "ward_officer", label: "Ward Officers" },
-  { value: "mayor", label: "Mayors" },
-  { value: "citizen", label: "Citizens" },
+  { value: "all", label: "All Agency Users & Contacts" },
+  { value: "candidate", label: "Registered Candidates" },
+  { value: "employer", label: "Foreign Employers" },
+  { value: "agent", label: "Sourcing Agents" },
+  { value: "recruiter", label: "Internal Recruiters & Staff" },
 ];
 
 export default function BroadcastModal({ isOpen, onClose }: BroadcastModalProps) {
@@ -53,18 +54,18 @@ export default function BroadcastModal({ isOpen, onClose }: BroadcastModalProps)
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg dark:bg-gray-900">
-        <h3 className="mb-4 text-xl font-bold text-gray-800 dark:text-white">Send Broadcast</h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4">
+      <div className="w-full max-w-lg rounded-xl border border-gray-200 bg-white p-5 shadow-xl dark:border-strokedark dark:bg-boxdark">
+        <h3 className="mb-4 text-base font-bold text-gray-900 dark:text-white">Send Broadcast Message</h3>
+        <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Target Role
+            <label className="mb-1 block font-medium text-gray-700 dark:text-gray-300">
+              Recipient Group
             </label>
             <select
               value={targetRole}
               onChange={(e) => setTargetRole(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2 text-gray-800 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:text-white"
+              className="w-full rounded-lg border border-gray-300 bg-transparent px-3 py-2 text-xs text-gray-800 outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:border-gray-700 dark:text-white dark:bg-gray-800"
             >
               {ROLES.map((role) => (
                 <option key={role.value} value={role.value} className="text-gray-800 dark:bg-gray-800 dark:text-gray-200">
@@ -75,44 +76,44 @@ export default function BroadcastModal({ isOpen, onClose }: BroadcastModalProps)
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-1 block font-medium text-gray-700 dark:text-gray-300">
               Subject (Optional)
             </label>
             <input
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2 text-gray-800 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:text-white"
-              placeholder="e.g. System Update"
+              className="w-full rounded-lg border border-gray-300 bg-transparent px-3 py-2 text-xs text-gray-800 outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:border-gray-700 dark:text-white"
+              placeholder="e.g. Visa Processing Update"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Message <span className="text-red-500">*</span>
+            <label className="mb-1 block font-medium text-gray-700 dark:text-gray-300">
+              Broadcast Content <span className="text-red-500">*</span>
             </label>
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               rows={4}
-              className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2 text-gray-800 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:text-white"
-              placeholder="Type your message here..."
+              className="w-full rounded-lg border border-gray-300 bg-transparent px-3 py-2 text-xs text-gray-800 outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:border-gray-700 dark:text-white"
+              placeholder="Type your message to dispatch via SMS, Email, and Push..."
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-2">
+          <div className="flex justify-end gap-2.5 pt-2">
             <button
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="rounded-lg border border-gray-300 px-4 py-2 font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+              className="rounded-lg border border-gray-300 px-3.5 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="rounded-lg bg-brand-500 px-4 py-2 font-medium text-white hover:bg-brand-600 disabled:opacity-50"
+              className="rounded-lg bg-brand-500 px-4 py-1.5 text-xs font-semibold text-white hover:bg-brand-600 disabled:opacity-50"
             >
               {isSubmitting ? "Sending..." : "Send Broadcast"}
             </button>

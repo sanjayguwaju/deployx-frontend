@@ -108,18 +108,21 @@ export default function Billing() {
 
         {/* Upgrade Plan */}
         <div className="p-6 bg-white border border-gray-200 rounded-2xl dark:bg-gray-800 dark:border-gray-700">
-          <h3 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white/90">Upgrade to Premium</h3>
-          <p className="mb-6 text-sm text-gray-500">Get access to unlimited wards, priority support, and advanced modules.</p>
+          <h3 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white/90">Upgrade to Agency Pro</h3>
+          <p className="mb-6 text-sm text-gray-500">Get access to unlimited branch offices, AI document parsing, and advanced recruitment modules.</p>
           
           <div className="p-5 border border-brand-100 bg-brand-50 rounded-xl dark:bg-brand-500/10 dark:border-brand-500/20">
             <h4 className="mb-2 text-xl font-bold text-gray-800 dark:text-white/90">NPR 15,000 <span className="text-sm font-normal text-gray-500">/ year</span></h4>
             
             <ul className="my-6 space-y-3">
               <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                <CheckCircle2 className="text-brand-500 size-4" /> Unlimited Wards & Users
+                <CheckCircle2 className="text-brand-500 size-4" /> Unlimited Branch Offices & Recruiters
               </li>
               <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                <CheckCircle2 className="text-brand-500 size-4" /> All Municipality Modules
+                <CheckCircle2 className="text-brand-500 size-4" /> Full Recruitment Pipeline & Demand Quotas
+              </li>
+              <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                <CheckCircle2 className="text-brand-500 size-4" /> AI Document Parser & WhatsApp Gateway
               </li>
               <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
                 <CheckCircle2 className="text-brand-500 size-4" /> Priority Support 24/7

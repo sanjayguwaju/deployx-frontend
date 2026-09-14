@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { Search, ArrowRight, User, Settings, Users, LayoutDashboard, Building, MapPin } from "lucide-react";
+import {
+  Search,
+  ArrowRight,
+  User,
+  Users,
+  LayoutDashboard,
+  Building,
+  Briefcase,
+  FileText,
+  CheckCircle2,
+  DollarSign,
+  Bot,
+  MessageSquare,
+  ShieldCheck,
+} from "lucide-react";
 import { Command } from "cmdk";
 import * as Dialog from "@radix-ui/react-dialog";
 
@@ -15,14 +29,22 @@ interface CommandItem {
 }
 
 const COMMANDS: CommandItem[] = [
-  { id: "nav-dashboard", name: "Dashboard", route: "/", icon: <LayoutDashboard size={16} />, category: "Navigation" },
-  { id: "nav-users", name: "Users", route: "/users", icon: <User size={16} />, category: "Navigation" },
-  { id: "nav-citizens", name: "Citizens", route: "/citizens", icon: <Users size={16} />, category: "Navigation" },
-  { id: "nav-wards", name: "Wards", route: "/wards", icon: <MapPin size={16} />, category: "Navigation" },
-  { id: "nav-settings", name: "System Settings", route: "/system/settings", icon: <Settings size={16} />, category: "Navigation" },
-  { id: "nav-branding", name: "Branding Settings", route: "/system/branding", icon: <Building size={16} />, category: "Navigation" },
-  { id: "action-add-user", name: "Add New User", route: "/users?action=new", icon: <User size={16} />, category: "Actions" },
-  { id: "action-add-citizen", name: "Add New Citizen", route: "/citizens?action=new", icon: <Users size={16} />, category: "Actions" },
+  { id: "nav-dashboard", name: "Agency Dashboard", route: "/dashboard", icon: <LayoutDashboard size={16} />, category: "Navigation" },
+  { id: "nav-candidates", name: "Candidates CRM", route: "/candidates", icon: <Users size={16} />, category: "Navigation" },
+  { id: "nav-demands", name: "Job Demands & Quotas", route: "/demands", icon: <Briefcase size={16} />, category: "Navigation" },
+  { id: "nav-employers", name: "Foreign Employers", route: "/employers", icon: <Building size={16} />, category: "Navigation" },
+  { id: "nav-pipelines", name: "Deployment Pipelines", route: "/pipelines", icon: <CheckCircle2 size={16} />, category: "Navigation" },
+  { id: "nav-contracts", name: "Candidate Contracts", route: "/contracts", icon: <FileText size={16} />, category: "Navigation" },
+  { id: "nav-ai-parser", name: "AI Document Parser", route: "/tools/smart-parser", icon: <Bot size={16} />, category: "Navigation" },
+  { id: "nav-agent-portal", name: "Sourcing Agent Portal", route: "/agent/dashboard", icon: <DollarSign size={16} />, category: "Navigation" },
+  { id: "nav-users", name: "Agency Staff & Users", route: "/users", icon: <User size={16} />, category: "Navigation" },
+  { id: "nav-roles", name: "Roles & Permissions", route: "/roles", icon: <ShieldCheck size={16} />, category: "Navigation" },
+  { id: "nav-branding", name: "White-Label Branding", route: "/settings/branding", icon: <Building size={16} />, category: "Navigation" },
+  { id: "nav-whatsapp", name: "WhatsApp Gateway", route: "/settings/whatsapp", icon: <MessageSquare size={16} />, category: "Navigation" },
+  { id: "action-add-candidate", name: "Register New Candidate", route: "/candidates", icon: <Users size={16} />, category: "Actions" },
+  { id: "action-add-demand", name: "Create Job Demand", route: "/demands", icon: <Briefcase size={16} />, category: "Actions" },
+  { id: "action-add-employer", name: "Add Foreign Employer", route: "/employers", icon: <Building size={16} />, category: "Actions" },
+  { id: "action-add-user", name: "Invite Agency User", route: "/users", icon: <User size={16} />, category: "Actions" },
 ];
 
 export const CommandPalette: React.FC = () => {

@@ -20,16 +20,49 @@ interface RoleFormProps {
 }
 
 const MODULES = [
-  "dashboard", "rbac", "users", "citizens", "complaints", 
-  "service_requests", "registration", "correspondence", "documents",
-  "notifications", "audit", "health", "education", "infrastructure",
-  "agriculture", "finance", "administrative", "disaster_management", "inventory"
+  "dashboard",
+  "candidates",
+  "employers",
+  "demands",
+  "pipelines",
+  "contracts",
+  "finance",
+  "commissions",
+  "compliance_checks",
+  "licenses",
+  "agent_portal",
+  "ai",
+  "users",
+  "rbac",
+  "notifications",
+  "audit",
+  "documents"
 ];
 const ACTIONS = ["read", "create", "update", "delete", "approve", "export"];
 
-// Helper to format strings like "service_requests" to "Service Requests"
+const MODULE_LABELS: Record<string, string> = {
+  dashboard: "Dashboard Analytics",
+  candidates: "Candidate CRM",
+  employers: "Employer & Client CRM",
+  demands: "Job Demands & Quotas",
+  pipelines: "Recruitment Pipelines",
+  contracts: "Contracts & Signatures",
+  finance: "Finance & Invoices",
+  commissions: "Agent Commissions",
+  compliance_checks: "Labor Compliance Checks",
+  licenses: "Agency Licenses",
+  agent_portal: "Agent Portal Access",
+  ai: "Smart AI Parser",
+  users: "User Management",
+  rbac: "Roles & Permissions",
+  notifications: "Broadcast & Notifications",
+  audit: "Audit Logs",
+  documents: "Document Storage"
+};
+
+// Helper to format strings
 const formatLabel = (str: string) => {
-  return str.split("_").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  return MODULE_LABELS[str] || str.split("_").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 };
 
 export const RoleForm: React.FC<RoleFormProps> = ({

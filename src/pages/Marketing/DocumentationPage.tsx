@@ -21,8 +21,8 @@ const categories = [
     color: "bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400",
   },
   {
-    title: "Citizen Portal",
-    description: "Configure how citizens interact with municipal services.",
+    title: "Candidate & Agent Portals",
+    description: "Configure how candidates and sourcing agents interact with your agency.",
     icon: Globe,
     color: "bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-400",
   },
@@ -43,7 +43,7 @@ const categories = [
 const popularArticles = [
   "How to change the primary brand color",
   "Inviting a new staff member",
-  "Setting up citizen registration",
+  "Setting up candidate registration",
   "Understanding role-based access control (RBAC)",
   "Configuring multi-level document approvals"
 ];

@@ -97,10 +97,10 @@ export const EditTenantModal: React.FC<EditTenantModalProps> = ({ isOpen, onClos
             onChange={(e) => setFormData({...formData, type: e.target.value})}
             className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:border-brand-500"
           >
-            <option value="Metropolitan">Metropolitan</option>
-            <option value="Sub-Metropolitan">Sub-Metropolitan</option>
-            <option value="Municipality">Municipality</option>
-            <option value="Rural Municipality">Rural Municipality</option>
+            <option value="Main Branch">Main Branch / Head Office</option>
+            <option value="Regional Office">Regional Office</option>
+            <option value="Overseas Branch">Overseas Branch</option>
+            <option value="Affiliate Agency">Affiliate Agency</option>
           </Select>
         </div>
         <div>

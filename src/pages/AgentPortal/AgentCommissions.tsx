@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { DollarSign, CheckCircle2, Clock } from "lucide-react";
 import { toast } from "react-hot-toast";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1";
+import api from "../../api/axios";
+import PageMeta from "../../components/common/PageMeta";
+import PageBreadcrumb from "../../components/common/PageBreadCrumb";
+import Badge from "../../components/ui/badge/Badge";
+import Loader from "../../components/common/Loader";
 
 interface Commission {
   _id: string;
-  candidateId: string; // Ideally populated
+  candidateId: string;
   amount: number;
   status: string;
   createdAt: string;
@@ -24,64 +27,134 @@ export default function AgentCommissions() {
 
   const fetchCommissions = async () => {
     try {
-      const response = await axios.get(`${API_URL}/portals/agent/commissions`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-      });
-      setCommissions(response.data.data);
+      setLoading(true);
+      const response = await api.get("/portals/agent/commissions");
+      if (response.data?.success) {
+        setCommissions(response.data.data || []);
+      }
     } catch (error) {
-      toast.error("Failed to load commissions");
+      toast.error("Failed to load commissions ledger");
     } finally {
       setLoading(false);
     }
   };
 
+  const totalPaid = commissions
+    .filter((c) => c.status === "paid")
+    .reduce((sum, c) => sum + (c.amount || 0), 0);
+
+  const totalPending = commissions
+    .filter((c) => c.status === "pending")
+    .reduce((sum, c) => sum + (c.amount || 0), 0);
+
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Commission Ledger</h2>
-        <p className="text-sm text-gray-500">Track your pending and paid commissions for successful deployments.</p>
+    <>
+      <PageMeta
+        title="Commission Ledger | DeployX"
+        description="Overseas sourcing agent commission ledger and disbursement vouchers."
+      />
+      <PageBreadcrumb pageTitle="Commission Ledger" />
+
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
+        <div className="rounded-xl border border-gray-200 bg-white p-3.5 dark:border-white/5 dark:bg-white/3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-500 dark:text-gray-400">Total Paid Out</span>
+            <span className="p-1.5 rounded-lg bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400">
+              <CheckCircle2 className="w-4 h-4" />
+            </span>
+          </div>
+          <p className="mt-2 text-xl font-bold text-gray-800 dark:text-white">
+            ${totalPaid.toLocaleString()}
+          </p>
+          <p className="mt-0.5 text-[11px] text-gray-400">Settled and disbursed to account</p>
+        </div>
+
+        <div className="rounded-xl border border-gray-200 bg-white p-3.5 dark:border-white/5 dark:bg-white/3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-500 dark:text-gray-400">Pending Approval / Payout</span>
+            <span className="p-1.5 rounded-lg bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400">
+              <Clock className="w-4 h-4" />
+            </span>
+          </div>
+          <p className="mt-2 text-xl font-bold text-gray-800 dark:text-white">
+            ${totalPending.toLocaleString()}
+          </p>
+          <p className="mt-0.5 text-[11px] text-gray-400">Awaiting candidate deployment or voucher processing</p>
+        </div>
       </div>
 
-      <div className="bg-white dark:bg-boxdark rounded-lg shadow-sm border border-gray-100 dark:border-strokedark overflow-hidden">
+      {/* Ledger Table */}
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/5 dark:bg-white/3">
+        <div className="px-4 py-3 border-b border-gray-100 dark:border-white/5 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <DollarSign className="w-4 h-4 text-brand-500" />
+            <h3 className="text-sm font-semibold text-gray-800 dark:text-white/90">
+              Transaction History
+            </h3>
+          </div>
+          <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[11px] font-medium text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
+            {commissions.length} Records
+          </span>
+        </div>
+
         {loading ? (
-          <div className="p-8 text-center"><div className="animate-spin inline-block rounded-full h-8 w-8 border-b-2 border-brand-500"></div></div>
+          <div className="py-12"><Loader /></div>
         ) : commissions.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">No commissions recorded yet.</div>
+          <div className="py-12 text-center text-xs text-gray-400">
+            No commission transactions recorded yet.
+          </div>
         ) : (
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gray-50 dark:bg-meta-4 text-gray-500 dark:text-gray-400 text-sm border-b border-gray-200 dark:border-strokedark">
-                <th className="p-4 font-semibold">Date</th>
-                <th className="p-4 font-semibold">Amount</th>
-                <th className="p-4 font-semibold">Status</th>
-                <th className="p-4 font-semibold">Paid Date</th>
-                <th className="p-4 font-semibold">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {commissions.map(commission => (
-                <tr key={commission._id} className="border-b border-gray-100 dark:border-strokedark hover:bg-gray-50 dark:hover:bg-meta-4 transition">
-                  <td className="p-4 text-gray-900 dark:text-white font-medium">{new Date(commission.createdAt).toLocaleDateString()}</td>
-                  <td className="p-4 font-bold text-gray-900 dark:text-white">${commission.amount.toLocaleString()}</td>
-                  <td className="p-4">
-                    <span className={`px-2 py-1 rounded text-xs font-medium uppercase ${
-                      commission.status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'
-                    }`}>
-                      {commission.status}
-                    </span>
-                  </td>
-                  <td className="p-4 text-gray-600 dark:text-gray-400">
-                    {commission.paidAt ? new Date(commission.paidAt).toLocaleDateString() : "-"}
-                  </td>
-                  <td className="p-4 text-gray-600 dark:text-gray-400 text-sm max-w-xs truncate">
-                    {commission.notes || "-"}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-gray-100 bg-gray-50/50 dark:border-white/5 dark:bg-white/3 text-[11px] font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-2.5">Date</th>
+                  <th className="px-4 py-2.5">Amount</th>
+                  <th className="px-4 py-2.5">Status</th>
+                  <th className="px-4 py-2.5">Settlement Date</th>
+                  <th className="px-4 py-2.5">Reference / Notes</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-100 dark:divide-white/5 text-xs">
+                {commissions.map((comm) => (
+                  <tr
+                    key={comm._id}
+                    className="hover:bg-gray-50/50 dark:hover:bg-white/3 transition-colors"
+                  >
+                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
+                      {new Date(comm.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-2.5 font-semibold text-gray-800 dark:text-white/90">
+                      ${comm.amount.toLocaleString()}
+                    </td>
+                    <td className="px-4 py-2.5">
+                      <Badge
+                        color={
+                          comm.status === "paid"
+                            ? "success"
+                            : comm.status === "pending"
+                            ? "warning"
+                            : "error"
+                        }
+                        size="sm"
+                      >
+                        {comm.status.toUpperCase()}
+                      </Badge>
+                    </td>
+                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
+                      {comm.paidAt ? new Date(comm.paidAt).toLocaleDateString() : "—"}
+                    </td>
+                    <td className="px-4 py-2.5 text-gray-500 dark:text-gray-400 max-w-xs truncate">
+                      {comm.notes || "—"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
-    </div>
+    </>
   );
 }

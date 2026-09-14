@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { toast } from "react-hot-toast";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1";
+import { Sparkles, CheckCircle2, FileText, Loader2, ArrowRight } from "lucide-react";
+import api from "../../api/axios";
+import PageMeta from "../../components/common/PageMeta";
+import PageBreadcrumb from "../../components/common/PageBreadCrumb";
+import Button from "../../components/ui/button/Button";
+import Input from "../../components/form/input/InputField";
+import Label from "../../components/form/Label";
 
 interface Candidate {
   _id: string;
@@ -15,7 +19,7 @@ export default function SmartDocumentParser() {
   const [documentUrl, setDocumentUrl] = useState("");
   const [documentType, setDocumentType] = useState("passport");
   const [isExtracting, setIsExtracting] = useState(false);
-  const [extractedData, setExtractedData] = useState<any>(null);
+  const [extractedData, setExtractedData] = useState<Record<string, any> | null>(null);
   const [confidence, setConfidence] = useState<number | null>(null);
   
   // For confirmation
@@ -24,13 +28,13 @@ export default function SmartDocumentParser() {
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    // Fetch candidates so user can assign the parsed data
     const fetchCandidates = async () => {
       try {
-        const response = await axios.get(`${API_URL}/candidates?pageSize=100`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        });
-        setCandidates(response.data.data);
+        const response = await api.get("/candidates?pageSize=100");
+        if (response.data.success) {
+          const raw = response.data.data;
+          setCandidates(Array.isArray(raw) ? raw : raw.candidates || raw.data || []);
+        }
       } catch (error) {
         console.error("Failed to load candidates");
       }
@@ -40,7 +44,7 @@ export default function SmartDocumentParser() {
 
   const handleExtract = async () => {
     if (!documentUrl) {
-      toast.error("Please provide a document URL");
+      toast.error("Please provide a document image URL");
       return;
     }
 
@@ -49,11 +53,10 @@ export default function SmartDocumentParser() {
     setConfidence(null);
 
     try {
-      const response = await axios.post(
-        `${API_URL}/ai/documents/test/extract`,
-        { documentUrl, type: documentType },
-        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-      );
+      const response = await api.post("/ai/documents/test/extract", {
+        documentUrl,
+        type: documentType,
+      });
       
       const payload = response.data.data;
       setExtractedData(payload.extractedData);
@@ -67,9 +70,10 @@ export default function SmartDocumentParser() {
   };
 
   const handleDataChange = (key: string, value: string) => {
+    if (!extractedData) return;
     setExtractedData({
       ...extractedData,
-      [key]: value
+      [key]: value,
     });
   };
 
@@ -81,14 +85,12 @@ export default function SmartDocumentParser() {
 
     setIsSaving(true);
     try {
-      await axios.post(
-        `${API_URL}/ai/documents/test/confirm-extraction`,
-        { candidateId: selectedCandidate, extractedData },
-        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-      );
+      await api.post("/ai/documents/test/confirm-extraction", {
+        candidateId: selectedCandidate,
+        extractedData,
+      });
       
-      toast.success("Document data saved to candidate successfully!");
-      // Reset
+      toast.success("Document data saved to candidate profile successfully!");
       setExtractedData(null);
       setDocumentUrl("");
       setSelectedCandidate("");
@@ -100,136 +102,172 @@ export default function SmartDocumentParser() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Smart Document Parser (OCR)</h2>
-        <p className="text-gray-500 mt-1">Upload a Passport or Visa to instantly extract data using AI Vision.</p>
-      </div>
+    <>
+      <PageMeta
+        title="AI Document Parser | DeployX"
+        description="Extract candidate details from passports and visas using AI OCR."
+      />
+      <PageBreadcrumb pageTitle="AI Document Parser (OCR)" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Left Side: Upload & Preview */}
-        <div className="bg-white dark:bg-boxdark rounded-lg shadow-sm border border-gray-100 dark:border-strokedark p-6">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Upload Document</h3>
+        <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-white/5 dark:bg-white/3">
+          <div className="flex items-center gap-2 pb-3 mb-3 border-b border-gray-100 dark:border-white/5">
+            <Sparkles className="w-4 h-4 text-brand-500" />
+            <h3 className="text-sm font-semibold text-gray-800 dark:text-white/90">
+              Document Input
+            </h3>
+          </div>
           
-          <div className="space-y-4">
+          <div className="space-y-3.5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Document Type</label>
+              <Label htmlFor="docType">Document Category</Label>
               <select 
+                id="docType"
                 value={documentType}
                 onChange={(e) => setDocumentType(e.target.value)}
-                className="w-full border rounded p-2 dark:bg-meta-4 dark:border-strokedark"
+                className="h-9 w-full rounded-lg border border-gray-200 bg-white px-3 py-1 text-xs text-gray-800 shadow-theme-xs focus:border-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-800 dark:bg-gray-900 dark:text-white/90"
               >
-                <option value="passport">Passport</option>
-                <option value="visa">Visa</option>
-                <option value="medical_report">Medical Report</option>
+                <option value="passport">Passport (Bio Page)</option>
+                <option value="visa">Employment Visa Stamping</option>
+                <option value="medical_report">GAMCA / Medical Fitness Report</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Document Image URL</label>
-              <input 
+              <Label htmlFor="docUrl">Document Image URL</Label>
+              <Input 
+                id="docUrl"
                 type="text" 
                 placeholder="https://example.com/sample-passport.jpg"
                 value={documentUrl}
                 onChange={(e) => setDocumentUrl(e.target.value)}
-                className="w-full border rounded p-2 dark:bg-meta-4 dark:border-strokedark"
+                className="h-9 text-xs"
               />
-              <p className="text-xs text-gray-500 mt-1">For MVP, paste a direct URL to an image.</p>
+              <p className="text-[11px] text-gray-400 mt-1">Direct publicly-accessible link to a scanned image or PDF screenshot.</p>
             </div>
 
             {documentUrl && (
-              <div className="mt-4 border rounded p-2 h-64 flex items-center justify-center bg-gray-50 dark:bg-meta-4 overflow-hidden">
-                <img src={documentUrl} alt="Document Preview" className="max-h-full max-w-full object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
+              <div className="rounded-lg border border-gray-200 dark:border-gray-800 p-2 h-56 flex items-center justify-center bg-gray-50/70 dark:bg-gray-900/50 overflow-hidden">
+                <img
+                  src={documentUrl}
+                  alt="Document Preview"
+                  className="max-h-full max-w-full object-contain rounded"
+                  onError={(e) => (e.currentTarget.style.display = 'none')}
+                />
               </div>
             )}
 
-            <button 
+            <Button 
+              type="button"
               onClick={handleExtract}
               disabled={isExtracting || !documentUrl}
-              className={`w-full py-3 rounded font-medium text-white transition-colors flex justify-center items-center gap-2 ${
-                isExtracting || !documentUrl ? "bg-brand-400 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-700"
-              }`}
+              className="w-full flex items-center justify-center gap-2"
+              size="sm"
             >
               {isExtracting ? (
                 <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                  Extracting via AI Vision...
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Extracting via Vision AI...</span>
                 </>
               ) : (
                 <>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                  Extract Data
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Run OCR Extraction</span>
                 </>
               )}
-            </button>
+            </Button>
           </div>
         </div>
 
         {/* Right Side: Extraction Results */}
-        <div className="bg-white dark:bg-boxdark rounded-lg shadow-sm border border-gray-100 dark:border-strokedark p-6">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Extraction Results</h3>
+        <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-white/5 dark:bg-white/3">
+          <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-100 dark:border-white/5">
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4 text-brand-500" />
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-white/90">
+                Extracted Data
+              </h3>
+            </div>
+            {confidence !== null && (
+              <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium ${
+                confidence > 0.85
+                  ? "bg-green-50 text-green-700 dark:bg-green-500/10 dark:text-green-400"
+                  : "bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400"
+              }`}>
+                <CheckCircle2 className="w-3 h-3" />
+                Confidence: {(confidence * 100).toFixed(1)}%
+              </span>
+            )}
+          </div>
           
           {!extractedData ? (
-            <div className="h-64 flex flex-col items-center justify-center text-gray-400 border-2 border-dashed border-gray-200 dark:border-strokedark rounded-lg">
-              <svg className="w-12 h-12 mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-              <p>Awaiting extraction...</p>
+            <div className="h-64 flex flex-col items-center justify-center text-gray-400 border border-dashed border-gray-200 dark:border-gray-800 rounded-lg">
+              <FileText className="w-8 h-8 mb-2 text-gray-300 dark:text-gray-600" />
+              <p className="text-xs text-gray-500 dark:text-gray-400">Awaiting document extraction...</p>
+              <p className="text-[11px] text-gray-400 mt-0.5">Submit an image URL on the left to extract structured fields.</p>
             </div>
           ) : (
-            <div className="space-y-6">
-              {confidence && (
-                <div className={`p-3 rounded flex items-center gap-2 text-sm font-medium ${
-                  confidence > 0.9 ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'
-                }`}>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                  AI Confidence Score: {(confidence * 100).toFixed(1)}%
-                </div>
-              )}
-
-              <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+            <div className="space-y-4">
+              <div className="space-y-2.5 max-h-[360px] overflow-y-auto pr-1">
                 {Object.entries(extractedData).map(([key, value]) => (
                   <div key={key}>
-                    <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">
+                    <Label htmlFor={key} className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1">
                       {key.replace(/([A-Z])/g, ' $1').trim()}
-                    </label>
-                    <input 
+                    </Label>
+                    <Input 
+                      id={key}
                       type="text" 
-                      value={value as string}
+                      value={typeof value === 'object' ? JSON.stringify(value) : (value as string ?? "")}
                       onChange={(e) => handleDataChange(key, e.target.value)}
-                      className="w-full border rounded p-2 dark:bg-meta-4 dark:border-strokedark font-medium text-gray-900 dark:text-white"
+                      className="h-8 text-xs font-mono"
                     />
                   </div>
                 ))}
               </div>
 
-              <div className="pt-6 border-t border-gray-200 dark:border-strokedark">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Assign to Candidate</label>
-                <select
-                  value={selectedCandidate}
-                  onChange={(e) => setSelectedCandidate(e.target.value)}
-                  className="w-full border rounded p-2 mb-4 dark:bg-meta-4 dark:border-strokedark"
-                >
-                  <option value="">-- Select Candidate --</option>
-                  {candidates.map(c => (
-                    <option key={c._id} value={c._id}>
-                      {c.firstName} {c.lastName} ({c.passportNumber || "No Passport"})
-                    </option>
-                  ))}
-                </select>
+              <div className="pt-3 border-t border-gray-100 dark:border-white/5 space-y-3">
+                <div>
+                  <Label htmlFor="candidateSelect">Assign to Candidate Profile</Label>
+                  <select
+                    id="candidateSelect"
+                    value={selectedCandidate}
+                    onChange={(e) => setSelectedCandidate(e.target.value)}
+                    className="h-9 w-full rounded-lg border border-gray-200 bg-white px-3 py-1 text-xs text-gray-800 shadow-theme-xs focus:border-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-800 dark:bg-gray-900 dark:text-white/90"
+                  >
+                    <option value="">-- Choose Candidate --</option>
+                    {candidates.map((c) => (
+                      <option key={c._id} value={c._id}>
+                        {c.firstName} {c.lastName} ({c.passportNumber || "No Passport"})
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                <button 
+                <Button 
+                  type="button"
                   onClick={handleConfirm}
                   disabled={isSaving || !selectedCandidate}
-                  className={`w-full py-2 rounded font-medium text-white transition-colors ${
-                    isSaving || !selectedCandidate ? "bg-brand-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
-                  }`}
+                  className="w-full flex items-center justify-center gap-1.5"
+                  size="sm"
                 >
-                  {isSaving ? "Saving..." : "Confirm & Save to Profile"}
-                </button>
+                  {isSaving ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Saving to Profile...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Confirm & Save to Candidate</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </>
+                  )}
+                </Button>
               </div>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }

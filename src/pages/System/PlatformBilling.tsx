@@ -37,18 +37,19 @@ export default function PlatformBilling() {
   const columnHelper = createColumnHelper<any>();
 
   const columns = useMemo(() => [
-    columnHelper.accessor((row) => row.municipalityId?.name, {
+    columnHelper.accessor((row) => row.tenantId?.name || row.municipalityId?.name, {
       id: "tenant",
-      header: "Tenant Name",
+      header: "Agency / Tenant",
       cell: (info) => {
         const row = info.row.original;
+        const tenant = row.tenantId || row.municipalityId;
         return (
           <div className="flex flex-col">
             <span className="font-semibold text-gray-900 dark:text-white">
-              {row.municipalityId?.name || "Unknown Tenant"}
+              {tenant?.name || "Unknown Agency"}
             </span>
             <span className="text-xs text-gray-500">
-              {row.municipalityId?.type} - {row.municipalityId?.district}
+              {tenant?.type || "Recruitment Agency"} {tenant?.country ? `- ${tenant.country}` : (tenant?.district ? `- ${tenant.district}` : "")}
             </span>
           </div>
         );

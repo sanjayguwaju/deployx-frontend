@@ -9,9 +9,11 @@ import {
 import Badge from "../ui/badge/Badge";
 import api from "../../api/axios";
 import { ConfirmDeleteModal } from "../ui/modal/ConfirmDeleteModal";
+import { FormModal } from "../ui/modal/FormModal";
 import { Pagination } from "../ui/pagination";
 import { Can } from "../../context/AbilityContext";
 import { Link } from "react-router";
+import { DemandForm, DemandFormData } from "./DemandForm";
 
 interface Demand {
   id: string;
@@ -32,6 +34,7 @@ export default function DemandsTable() {
   const [error, setError] = useState<string | null>(null);
 
   // Modal State
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [selectedDemand, setSelectedDemand] = useState<Demand | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -76,6 +79,21 @@ export default function DemandsTable() {
       fetchDemands(currentPage);
     } catch (err: any) {
       alert("Error deleting demand: " + (err.response?.data?.message || err.message));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleCreateSubmit = async (data: DemandFormData) => {
+    try {
+      setIsSubmitting(true);
+      const res = await api.post("/demands", data);
+      if (res.data.success) {
+        setIsFormOpen(false);
+        fetchDemands(currentPage);
+      }
+    } catch (err: any) {
+      alert("Error creating demand: " + (err.response?.data?.message || err.message));
     } finally {
       setIsSubmitting(false);
     }
@@ -209,7 +227,8 @@ export default function DemandsTable() {
         </h3>
         <Can I="create" a="demands">
           <button 
-            className="px-3 py-1.5 text-xs font-medium text-white bg-brand-500 rounded-lg hover:bg-brand-600"
+            onClick={() => setIsFormOpen(true)}
+            className="px-3 py-1.5 text-xs font-medium text-white bg-brand-500 rounded-lg hover:bg-brand-600 transition-colors"
           >
             Create Demand
           </button>
@@ -227,6 +246,19 @@ export default function DemandsTable() {
         />
       </div>
       </div>
+
+      <FormModal
+        isOpen={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        title="Create Job Demand"
+        description="Register a new overseas manpower demand quota from a foreign employer."
+      >
+        <DemandForm
+          onSubmit={handleCreateSubmit}
+          onCancel={() => setIsFormOpen(false)}
+          isSubmitting={isSubmitting}
+        />
+      </FormModal>
 
       <ConfirmDeleteModal
         isOpen={isDeleteOpen}

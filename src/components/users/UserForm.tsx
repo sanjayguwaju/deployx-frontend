@@ -12,6 +12,7 @@ export interface UserFormData {
   designation?: string;
   isActive: boolean;
   roles?: string[];
+  officeId?: string;
   wardId?: string;
 }
 
@@ -21,24 +22,25 @@ interface Role {
   slug: string;
 }
 
-interface Ward {
+interface Office {
   _id: string;
-  nameNp?: string;
-  wardNumber: number;
+  name: string;
+  code?: string;
+  isMainOffice?: boolean;
 }
 
 const DESIGNATIONS = [
-  "Chairperson / Mayor",
-  "Vice-Chairperson / Deputy Mayor",
-  "Chief Administrative Officer (CAO)",
-  "Section Chief",
-  "Officer",
-  "Assistant Officer",
-  "Senior Assistant",
-  "Assistant",
-  "Junior Assistant",
-  "Support Staff",
-  "Ward Officer",
+  "Managing Director / Owner",
+  "General Manager",
+  "Branch Manager",
+  "Senior Recruitment Consultant",
+  "Recruiter / Talent Sourcing Officer",
+  "Documentation & Visa Officer",
+  "Public Relations Officer (PRO)",
+  "Finance & Accounts Officer",
+  "Compliance & Legal Officer",
+  "Operations Coordinator",
+  "Administrative Assistant",
   "Other"
 ];
 
@@ -50,8 +52,8 @@ interface UserFormProps {
 }
 
 const inputClass =
-  "w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white";
-const labelClass = "mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300";
+  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white";
+const labelClass = "mb-1 block text-xs font-medium text-gray-700 dark:text-gray-300";
 
 export const UserForm: React.FC<UserFormProps> = ({
   initialData,
@@ -68,11 +70,12 @@ export const UserForm: React.FC<UserFormProps> = ({
     designation: initialData?.designation || "",
     isActive: initialData?.isActive !== undefined ? initialData.isActive : true,
     roles: initialData?.roles || [],
+    officeId: initialData?.officeId || initialData?.wardId || "",
     wardId: initialData?.wardId || "",
   });
 
   const [roles, setRoles] = useState<Role[]>([]);
-  const [wards, setWards] = useState<Ward[]>([]);
+  const [offices, setOffices] = useState<Office[]>([]);
   const [loadingDropdowns, setLoadingDropdowns] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -86,17 +89,17 @@ export const UserForm: React.FC<UserFormProps> = ({
   useEffect(() => {
     const fetchOptions = async () => {
       try {
-        const [rolesRes, wardsRes] = await Promise.all([
+        const [rolesRes, officesRes] = await Promise.all([
           api.get("/roles"),
-          api.get("/wards"),
+          api.get("/offices").catch(() => ({ data: { success: false, data: [] } })),
         ]);
         if (rolesRes.data.success) {
           const rolesData = rolesRes.data.data;
           setRoles(Array.isArray(rolesData) ? rolesData : rolesData.roles || rolesData.data || []);
         }
-        if (wardsRes.data.success) {
-          const wardsData = wardsRes.data.data;
-          setWards(Array.isArray(wardsData) ? wardsData : wardsData.wards || wardsData.data || []);
+        if (officesRes.data?.success) {
+          const officesData = officesRes.data.data;
+          setOffices(Array.isArray(officesData) ? officesData : officesData.offices || officesData.data || []);
         }
       } catch (err) {
         // Silently ignore — dropdowns will just be empty
@@ -195,15 +198,15 @@ export const UserForm: React.FC<UserFormProps> = ({
           />
         </div>
         <div>
-          <label className={labelClass}>{t("users.ward_assignment")}</label>
+          <label className={labelClass}>Branch / Office Assignment</label>
           <ComboboxSelect
-            options={wards.map((ward) => ({
-              value: ward._id,
-              label: t("users.ward_option", { number: ward.wardNumber, name: ward.nameNp || "" }) as string
+            options={offices.map((off) => ({
+              value: off._id,
+              label: off.name || "Main Office",
             }))}
-            value={formData.wardId || ""}
-            onChange={(val) => setFormData((prev) => ({ ...prev, wardId: val }))}
-            placeholder={t("users.no_ward") as string}
+            value={formData.officeId || formData.wardId || ""}
+            onChange={(val) => setFormData((prev) => ({ ...prev, officeId: val, wardId: val }))}
+            placeholder="— Select Agency Office —"
             disabled={loadingDropdowns}
             hideSearchIcon={true}
           />

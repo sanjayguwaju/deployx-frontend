@@ -32,7 +32,7 @@ export default function DocumentationArticlePage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         <article className="prose prose-lg dark:prose-invert prose-brand max-w-none">
           <p className="lead">
-            Role-Based Access Control (RBAC) is a method of restricting network access based on the roles of individual users within an enterprise. In DeployX, RBAC ensures that municipal staff only have access to the information and actions necessary for their specific jobs.
+            Role-Based Access Control (RBAC) is a method of restricting network access based on the roles of individual users within an enterprise. In DeployX, RBAC ensures that agency staff only have access to the candidate data, demands, pipeline stages, and actions necessary for their specific jobs.
           </p>
 
           <h2>Core Concepts</h2>
@@ -41,8 +41,8 @@ export default function DocumentationArticlePage() {
           </p>
           <ul>
             <li><strong>Users:</strong> The actual individuals logging into the system.</li>
-            <li><strong>Roles:</strong> A collection of permissions (e.g., "Ward Secretary", "Mayor", "IT Admin").</li>
-            <li><strong>Permissions:</strong> Specific rights to perform actions on resources (e.g., "approve_document", "create_user").</li>
+            <li><strong>Roles:</strong> A collection of permissions (e.g., "General Manager", "Recruiter", "Visa Officer").</li>
+            <li><strong>Permissions:</strong> Specific rights to perform actions on resources (e.g., "candidates.create", "demands.approve", "contracts.sign").</li>
           </ul>
 
           <h2>Default Roles</h2>
@@ -61,19 +61,19 @@ export default function DocumentationArticlePage() {
               </thead>
               <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Super Admin</td>
-                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Full access to the entire agency portal.</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Agency Admin</td>
+                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Full access to the entire agency portal and branch offices.</td>
                   <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">All permissions</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Ward Secretary</td>
-                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Manages operations at the ward level.</td>
-                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Manage ward citizens, approve local documents</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Recruiter</td>
+                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Manages candidates, demand quotas, and interview scheduling.</td>
+                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Manage candidates, assign to demands</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Tax Officer</td>
-                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Handles revenue and taxation.</td>
-                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">View tax records, process payments</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Visa & Processing Officer</td>
+                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Handles medical reports, visa stamping, and ticketing.</td>
+                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Update pipeline stages, upload documents</td>
                 </tr>
               </tbody>
             </table>

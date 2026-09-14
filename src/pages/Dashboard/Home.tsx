@@ -23,14 +23,14 @@ const EN_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"
 
 function KpiCard({ label, value, icon, color, sublabel }: { label: string; value: number | string; icon: React.ReactNode; color: string; sublabel?: string }) {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-white/5 dark:bg-white/3">
+    <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-white/5 dark:bg-white/3">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
-          <p className="mt-1 text-3xl font-bold text-gray-800 dark:text-white">{value}</p>
-          {sublabel && <p className="mt-1 text-xs text-gray-400">{sublabel}</p>}
+          <p className="text-xs text-gray-500 dark:text-gray-400">{label}</p>
+          <p className="mt-1 text-xl font-bold text-gray-800 dark:text-white">{value}</p>
+          {sublabel && <p className="mt-0.5 text-[11px] text-gray-400">{sublabel}</p>}
         </div>
-        <div className={`flex h-12 w-12 items-center justify-center rounded-xl text-2xl ${color}`}>
+        <div className={`flex h-10 w-10 items-center justify-center rounded-lg text-lg ${color}`}>
           {icon}
         </div>
       </div>
@@ -116,32 +116,32 @@ export default function Home() {
         </div>
 
         {/* Top Charts Row */}
-        <div className="grid grid-cols-1 gap-6 xl:grid-cols-3 mb-6">
-          <div className="xl:col-span-2 rounded-2xl border border-gray-200 bg-white p-5 dark:border-white/5 dark:bg-white/3">
-            <h3 className="mb-4 text-base font-semibold text-gray-800 dark:text-white/90">Monthly Trends</h3>
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-3 mb-4">
+          <div className="xl:col-span-2 rounded-xl border border-gray-200 bg-white p-4 dark:border-white/5 dark:bg-white/3">
+            <h3 className="mb-3 text-sm font-semibold text-gray-800 dark:text-white/90">Monthly Trends</h3>
             <LineChartOne series={trendSeries} categories={EN_MONTHS} colors={["#465fff", "#f05252"]} />
           </div>
 
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-white/5 dark:bg-white/3">
-            <h3 className="mb-4 text-base font-semibold text-gray-800 dark:text-white/90">Pipeline Status</h3>
+          <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-white/5 dark:bg-white/3">
+            <h3 className="mb-3 text-sm font-semibold text-gray-800 dark:text-white/90">Pipeline Status</h3>
             {srStatusValues.length > 0 ? (
               <PieChartOne series={srStatusValues} labels={srStatusLabels} />
-            ) : <div className="flex h-64 items-center justify-center text-gray-400 text-sm">No data available</div>}
+            ) : <div className="flex h-64 items-center justify-center text-gray-400 text-xs">No data available</div>}
           </div>
         </div>
 
         {/* Bottom Charts Row */}
-        <div className="grid grid-cols-1 gap-6 xl:grid-cols-3 mb-6">
-          <div className="xl:col-span-2 rounded-2xl border border-gray-200 bg-white p-5 dark:border-white/5 dark:bg-white/3">
-            <h3 className="mb-4 text-base font-semibold text-gray-800 dark:text-white/90">Revenue Collection</h3>
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-3 mb-4">
+          <div className="xl:col-span-2 rounded-xl border border-gray-200 bg-white p-4 dark:border-white/5 dark:bg-white/3">
+            <h3 className="mb-3 text-sm font-semibold text-gray-800 dark:text-white/90">Revenue Collection</h3>
             <BarChartOne series={revenueSeries} categories={EN_MONTHS} colors={["#10b981"]} />
           </div>
 
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-white/5 dark:bg-white/3">
-            <h3 className="mb-4 text-base font-semibold text-gray-800 dark:text-white/90">Visa Approvals</h3>
+          <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-white/5 dark:bg-white/3">
+            <h3 className="mb-3 text-sm font-semibold text-gray-800 dark:text-white/90">Visa Approvals</h3>
             {infraStatusValues.length > 0 ? (
               <PieChartOne series={infraStatusValues} labels={infraStatusLabels} colors={["#f59e0b", "#10b981", "#3b82f6", "#ef4444", "#8b5cf6"]} />
-            ) : <div className="flex h-64 items-center justify-center text-gray-400 text-sm">No data available</div>}
+            ) : <div className="flex h-64 items-center justify-center text-gray-400 text-xs">No data available</div>}
           </div>
         </div>
       </>

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { toast } from "react-hot-toast";
+import { Users, CheckCircle2, Clock, DollarSign, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router";
+import api from "../../api/axios";
 import { useAuth } from "../../context/AuthContext";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1";
+import PageMeta from "../../components/common/PageMeta";
+import PageBreadcrumb from "../../components/common/PageBreadCrumb";
+import Loader from "../../components/common/Loader";
 
 interface DashboardMetrics {
   totalReferrals: number;
@@ -30,25 +32,24 @@ export default function AgentDashboard() {
 
   const fetchMetrics = async () => {
     try {
-      // In a full implementation, we'd have a specific /dashboard endpoint for agents.
-      // For now, we fetch candidates and commissions to aggregate the data on the client.
+      setLoading(true);
       const [candidatesRes, commissionsRes] = await Promise.all([
-        axios.get(`${API_URL}/portals/agent/candidates?pageSize=100`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }),
-        axios.get(`${API_URL}/portals/agent/commissions`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
+        api.get("/portals/agent/candidates?pageSize=100"),
+        api.get("/portals/agent/commissions"),
       ]);
 
-      const candidates = candidatesRes.data.data;
-      const commissions = commissionsRes.data.data;
+      const candidates = candidatesRes.data?.data || [];
+      const commissions = commissionsRes.data?.data || [];
 
       const deployed = candidates.filter((c: any) => c.status === "completed" || c.status === "deployed").length;
       
       const pendingComm = commissions
         .filter((c: any) => c.status === "pending")
-        .reduce((sum: number, c: any) => sum + c.amount, 0);
+        .reduce((sum: number, c: any) => sum + (c.amount || 0), 0);
         
       const paidComm = commissions
         .filter((c: any) => c.status === "paid")
-        .reduce((sum: number, c: any) => sum + c.amount, 0);
+        .reduce((sum: number, c: any) => sum + (c.amount || 0), 0);
 
       setMetrics({
         totalReferrals: candidates.length,
@@ -57,84 +58,136 @@ export default function AgentDashboard() {
         pendingCommission: pendingComm,
         paidCommission: paidComm,
       });
-
     } catch (error) {
-      toast.error("Failed to load dashboard metrics");
+      console.error("Failed to load agent dashboard metrics", error);
     } finally {
       setLoading(false);
     }
   };
 
   if (loading) {
-    return (
-      <div className="flex h-full items-center justify-center p-8">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500"></div>
-      </div>
-    );
+    return <Loader />;
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Welcome back, {user?.name}</h2>
-        <p className="text-gray-500 mt-1">Here is the latest overview of your referrals and commissions.</p>
+    <>
+      <PageMeta
+        title="Agent Portal Dashboard | DeployX"
+        description="Overseas sourcing agent candidate referrals and commission overview."
+      />
+      <PageBreadcrumb pageTitle="Agent Portal Dashboard" />
+
+      {/* Welcome Banner */}
+      <div className="mb-4 rounded-xl border border-brand-100 bg-brand-50/40 p-4 dark:border-brand-500/20 dark:bg-brand-500/5">
+        <h2 className="text-sm font-semibold text-gray-800 dark:text-white">
+          Welcome, {user?.name || "Agent Partner"}
+        </h2>
+        <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+          Track your candidate pipeline, status milestones, and commission disbursements in real time.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {/* Metric Cards */}
-        <div className="bg-white dark:bg-boxdark rounded-lg p-6 shadow-sm border border-gray-100 dark:border-strokedark">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wider">Total Referrals</h3>
-            <span className="text-brand-500 bg-brand-50 p-2 rounded-full">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+      {/* Metric Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 mb-4">
+        <div className="rounded-xl border border-gray-200 bg-white p-3.5 dark:border-white/5 dark:bg-white/3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-500 dark:text-gray-400">Total Sourced</span>
+            <span className="p-1.5 rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+              <Users className="w-4 h-4" />
             </span>
           </div>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">{metrics.totalReferrals}</p>
+          <p className="mt-2 text-xl font-bold text-gray-800 dark:text-white">
+            {metrics.totalReferrals}
+          </p>
+          <p className="mt-0.5 text-[11px] text-gray-400">Candidates registered</p>
         </div>
 
-        <div className="bg-white dark:bg-boxdark rounded-lg p-6 shadow-sm border border-gray-100 dark:border-strokedark">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wider">Deployed</h3>
-            <span className="text-green-500 bg-green-50 p-2 rounded-full">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div className="rounded-xl border border-gray-200 bg-white p-3.5 dark:border-white/5 dark:bg-white/3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-500 dark:text-gray-400">In Pipeline</span>
+            <span className="p-1.5 rounded-lg bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400">
+              <Clock className="w-4 h-4" />
             </span>
           </div>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">{metrics.deployedCandidates}</p>
+          <p className="mt-2 text-xl font-bold text-gray-800 dark:text-white">
+            {metrics.activeReferrals}
+          </p>
+          <p className="mt-0.5 text-[11px] text-gray-400">Interview/Medical/Visa</p>
         </div>
 
-        <div className="bg-white dark:bg-boxdark rounded-lg p-6 shadow-sm border border-gray-100 dark:border-strokedark">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wider">Pending Comm.</h3>
-            <span className="text-orange-500 bg-orange-50 p-2 rounded-full">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div className="rounded-xl border border-gray-200 bg-white p-3.5 dark:border-white/5 dark:bg-white/3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-500 dark:text-gray-400">Deployed</span>
+            <span className="p-1.5 rounded-lg bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400">
+              <CheckCircle2 className="w-4 h-4" />
             </span>
           </div>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">${metrics.pendingCommission.toLocaleString()}</p>
+          <p className="mt-2 text-xl font-bold text-gray-800 dark:text-white">
+            {metrics.deployedCandidates}
+          </p>
+          <p className="mt-0.5 text-[11px] text-gray-400">Successfully placed abroad</p>
         </div>
 
-        <div className="bg-white dark:bg-boxdark rounded-lg p-6 shadow-sm border border-gray-100 dark:border-strokedark">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wider">Paid Comm.</h3>
-            <span className="text-brand-500 bg-brand-50 p-2 rounded-full">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div className="rounded-xl border border-gray-200 bg-white p-3.5 dark:border-white/5 dark:bg-white/3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-500 dark:text-gray-400">Commissions Paid</span>
+            <span className="p-1.5 rounded-lg bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400">
+              <DollarSign className="w-4 h-4" />
             </span>
           </div>
-          <p className="text-3xl font-bold text-brand-600">${metrics.paidCommission.toLocaleString()}</p>
+          <p className="mt-2 text-xl font-bold text-gray-800 dark:text-white">
+            ${metrics.paidCommission.toLocaleString()}
+          </p>
+          <p className="mt-0.5 text-[11px] text-gray-400">Pending: ${metrics.pendingCommission.toLocaleString()}</p>
         </div>
       </div>
-      
-      {/* Quick Actions */}
-      <div className="bg-white dark:bg-boxdark rounded-lg shadow-sm border border-gray-100 dark:border-strokedark p-6">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Quick Actions</h3>
-        <div className="flex flex-wrap gap-4">
-          <button onClick={() => window.location.href = '/agent/candidates'} className="bg-brand-600 text-white px-6 py-2 rounded font-medium hover:bg-brand-700 transition">
-            Submit New Candidate
-          </button>
-          <button onClick={() => window.location.href = '/agent/commissions'} className="bg-gray-100 text-gray-800 dark:bg-meta-4 dark:text-white px-6 py-2 rounded font-medium hover:bg-gray-200 dark:hover:bg-strokedark transition">
-            View Commission Ledger
-          </button>
-        </div>
+
+      {/* Quick Access Links */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <Link
+          to="/agent/candidates"
+          className="group rounded-xl border border-gray-200 bg-white p-4 hover:border-brand-300 dark:border-white/5 dark:bg-white/3 dark:hover:border-brand-500/30 transition-all"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
+                <Users className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-semibold text-gray-800 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+                  Referred Candidates
+                </h4>
+                <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                  Submit new candidate referrals or review vetting and medical statuses.
+                </p>
+              </div>
+            </div>
+            <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-brand-500 transition-colors" />
+          </div>
+        </Link>
+
+        <Link
+          to="/agent/commissions"
+          className="group rounded-xl border border-gray-200 bg-white p-4 hover:border-brand-300 dark:border-white/5 dark:bg-white/3 dark:hover:border-brand-500/30 transition-all"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400">
+                <DollarSign className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-semibold text-gray-800 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                  Commissions Ledger
+                </h4>
+                <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                  View payment vouchers, release dates, and payout breakdowns.
+                </p>
+              </div>
+            </div>
+            <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-green-500 transition-colors" />
+          </div>
+        </Link>
       </div>
-    </div>
+    </>
   );
 }

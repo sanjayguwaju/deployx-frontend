@@ -10,14 +10,14 @@ export default function Notifications() {
   return (
     <>
       <PageMeta
-        title="Notifications Log | DeployX"
-        description="View SMS, Email, and Push notifications sent to citizens"
+        title="Notifications & Dispatches | DeployX"
+        description="View SMS, Email, and Push notifications dispatched to candidates, employers, and agents"
       />
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-4">
         <PageBreadcrumb pageTitle="Notifications" />
         <button
           onClick={() => setIsModalOpen(true)}
-          className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 mb-6"
+          className="rounded-lg bg-brand-500 px-3.5 py-1.5 text-xs font-semibold text-white shadow-xs hover:bg-brand-600 transition-colors"
         >
           Send Broadcast
         </button>
