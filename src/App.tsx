@@ -39,6 +39,7 @@ import RegisterAgency from "./pages/Onboarding/RegisterAgency";
 import Employers from "./pages/Employers/Employers";
 import Candidates from "./pages/Candidates/Candidates";
 import Demands from "./pages/Demands/Demands";
+import Contracts from "./pages/Contracts/Contracts";
 import Users from "./pages/Users/Users";
 import Roles from "./pages/Users/Roles";
 import Notifications from "./pages/Notifications/Notifications";
@@ -115,6 +116,7 @@ export default function App() {
                   <Route path="/employers" element={<ProtectedRoute action="read" subject="employers"><Employers /></ProtectedRoute>} />
                   <Route path="/candidates" element={<ProtectedRoute action="read" subject="candidates"><Candidates /></ProtectedRoute>} />
                   <Route path="/demands" element={<ProtectedRoute action="read" subject="demands"><Demands /></ProtectedRoute>} />
+                  <Route path="/contracts" element={<ProtectedRoute><Contracts /></ProtectedRoute>} />
                   
                   <Route path="/users" element={<ProtectedRoute action="read" subject="users"><Users /></ProtectedRoute>} />
                   <Route path="/roles" element={<ProtectedRoute action="read" subject="rbac"><Roles /></ProtectedRoute>} />
