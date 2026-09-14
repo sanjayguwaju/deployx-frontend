@@ -33,9 +33,10 @@ export default function SignInForm() {
         login(accessToken, user);
         toast.success("Signed in successfully!");
         
-        if (user.rolesSlugs?.includes("platform_admin")) {
+        const userRoles = user.roles || user.rolesSlugs || [];
+        if (userRoles.includes("platform_admin")) {
           navigate("/superadmin");
-        } else if (user.rolesSlugs?.includes("tenant_admin")) {
+        } else if (userRoles.includes("tenant_admin")) {
           navigate("/admin");
         } else {
           navigate("/dashboard");
