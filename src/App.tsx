@@ -122,7 +122,8 @@ export default function App() {
                   <Route path="/roles" element={<ProtectedRoute action="read" subject="rbac"><Roles /></ProtectedRoute>} />
                   <Route path="/notifications" element={<ProtectedRoute action="read" subject="notifications"><Notifications /></ProtectedRoute>} />
                   <Route path="/audit-logs" element={<ProtectedRoute action="read" subject="audit_logs"><AuditLogs /></ProtectedRoute>} />
-                  <Route path="/demands/:id/pipeline" element={<ProtectedRoute action="read" subject="dashboard"><PipelineBoard /></ProtectedRoute>} />
+                  <Route path="/pipelines" element={<ProtectedRoute><PipelineBoard /></ProtectedRoute>} />
+                  <Route path="/demands/:id/pipeline" element={<ProtectedRoute><PipelineBoard /></ProtectedRoute>} />
                   <Route path="/approvals" element={<ProtectedRoute action="read" subject="ApprovableDocument"><Approvals /></ProtectedRoute>} />
                   <Route path="/feature-flags" element={<ProtectedRoute action="manage" subject="FeatureFlag"><FeatureFlagsAdmin /></ProtectedRoute>} />
                   <Route path="/admin" element={<ProtectedRoute><TenantAdminDashboard /></ProtectedRoute>} />
