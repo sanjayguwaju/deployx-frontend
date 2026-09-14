@@ -18,9 +18,9 @@ export function DataTable<TData>({ table, isLoading = false }: DataTableProps<TD
                   <TableCell
                     key={header.id}
                     isHeader
-                    className={`px-4 py-3 font-medium text-gray-700 text-start text-sm dark:text-gray-300 ${
+                    className={`px-3.5 py-2 font-semibold text-gray-600 text-start text-xs uppercase tracking-wider dark:text-gray-400 ${
                       header.id === "actions" ? "text-right" : ""
-                    } ${header.id === "select" ? "w-12" : ""}`}
+                    } ${header.id === "select" ? "w-10" : ""}`}
                   >
                     {header.isPlaceholder
                       ? null
@@ -36,7 +36,7 @@ export function DataTable<TData>({ table, isLoading = false }: DataTableProps<TD
           <TableBody className="divide-y divide-gray-200 dark:divide-gray-700">
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={table.getAllColumns().length} className="text-center py-8">
+                <TableCell colSpan={table.getAllColumns().length} className="text-center py-6 text-xs">
                   Loading...
                 </TableCell>
               </TableRow>
@@ -46,9 +46,9 @@ export function DataTable<TData>({ table, isLoading = false }: DataTableProps<TD
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className={`px-4 py-3 text-gray-900 dark:text-gray-300 ${
+                      className={`px-3.5 py-2 text-xs text-gray-800 dark:text-gray-200 ${
                         cell.column.id === "actions" ? "text-right" : "text-start"
-                      } ${cell.column.id === "select" ? "w-12 sm:px-6" : ""}`}
+                      } ${cell.column.id === "select" ? "w-10 sm:px-4" : ""}`}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
