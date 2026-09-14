@@ -9,8 +9,8 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    // Always default to Nepali initially
-    lng: localStorage.getItem('i18nextLng') || 'ne',
+    // Default to English initially
+    lng: localStorage.getItem('i18nextLng') || 'en',
     debug: false,
 
     interpolation: {
