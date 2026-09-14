@@ -97,8 +97,8 @@ export default function Home() {
     const infraStatusValues = Object.keys(infraByStatus).map((k) => infraByStatus[k]);
 
     const trendSeries = [
-      { name: "Active Demands", data: data?.serviceRequests.monthly || Array(12).fill(0) },
-      { name: "Pending Approvals", data: data?.complaints.monthly || Array(12).fill(0) },
+      { name: "Candidate Registrations", data: data?.serviceRequests.monthly || Array(12).fill(0) },
+      { name: "Deployments", data: data?.complaints.monthly || Array(12).fill(0) },
     ];
     
     const revenueSeries = [
@@ -112,7 +112,7 @@ export default function Home() {
           <KpiCard label="Total Candidates" value={data?.citizens.total ?? "—"} icon={<GroupIcon />} color="bg-blue-50 dark:bg-blue-500/10 text-blue-500" sublabel="Registered in system" />
           <KpiCard label="Active Demands" value={data?.serviceRequests.pending ?? "—"} icon={<FileIcon />} color="bg-amber-50 dark:bg-amber-500/10 text-amber-500" sublabel="Awaiting matching" />
           <KpiCard label="Revenue Collected" value={`$ ${(data?.budget.totalAllocated || 0).toLocaleString()}`} icon={<DollarLineIcon />} color="bg-green-50 dark:bg-green-500/10 text-green-500" sublabel={`Invoiced: $ ${(data?.budget.totalSpent || 0).toLocaleString()}`} />
-          <KpiCard label="Deployments" value={data?.totalProjects ?? "—"} icon={<BoxCubeIcon />} color="bg-purple-50 dark:bg-purple-500/10 text-purple-500" sublabel="Currently in pipeline" />
+          <KpiCard label="Candidates in Pipeline" value={data?.totalProjects ?? "—"} icon={<BoxCubeIcon />} color="bg-purple-50 dark:bg-purple-500/10 text-purple-500" sublabel="Active recruitment pipeline" />
         </div>
 
         {/* Top Charts Row */}
